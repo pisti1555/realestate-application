@@ -1,0 +1,20 @@
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eaeaea;
+
+    
+}
+
+.nav-bar .nav-container {
+    display: flex;
+    padding: 5px;
+    padding-inline: 10px;
+}
+
+.nav-bar .nav-container a {
+    margin-inline: 5px;
+    text-decoration: none;
+    color: black;
+}
