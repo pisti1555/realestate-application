@@ -13,7 +13,7 @@ const Logout = () => {
             await logout();
             navigate('/login');
         } catch (error:any) {
-            setErrors(error);
+            setErrors(error.message);
         }
         };
 

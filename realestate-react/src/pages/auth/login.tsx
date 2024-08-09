@@ -1,7 +1,6 @@
 import React, { useState, useEffect,  FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth';
-//import "D:/Projektek/Laravel/realestate-application/realestate-react/src/css/auth/login_page.css";
 import '../../css/auth/login_page.css';
 
 const Login = () => {
@@ -20,18 +19,22 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      setSuccess(true);
-      setErrors('');
+      const response = await login(email, password);
+      if (response.status == true) { 
+        setSuccess(true);
+        setErrors('');
+      } else {
+        setErrors(response.message);
+      }
     } catch (err:any) {
-      setErrors(err);
+      setErrors(err.message);
       setSuccess(false);
     }
   };
 
   return (
     <div className="container">
-      <h2>Register</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit} className="register-form">
         <div>
           <label htmlFor="email">Email</label>
@@ -55,7 +58,7 @@ const Login = () => {
             required
           />
         </div>
-        {errors && <p>Login failed</p>}
+        {errors && <p>{errors}</p>}
         <button type="submit">Login</button>
       </form>
     </div>

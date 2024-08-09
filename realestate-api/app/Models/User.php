@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isAgent()
+    {
+        return $this->role == 'agent';
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
 }

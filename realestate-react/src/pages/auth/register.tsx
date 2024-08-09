@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../../services/auth';
 import "D:/Projektek/Laravel/realestate-application/realestate-react/src/css/auth/registration_page.css";
@@ -7,20 +7,27 @@ const Register = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<boolean>(false);
+  const [errors, setErrors] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (success) navigate('/welcome?registration-success');
+  }, [success]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await register(name, email, password);
-      setSuccess(true);
-      setError(false);
-    } catch (err) {
-      setError(true);
+        const response = await register(name, email, password);
+        if (response.status == true) { 
+          setSuccess(true);
+          setErrors('');
+        } else {
+          setErrors(response.message);
+        }
+    } catch (error:any) {
+      setErrors(error.message);
       setSuccess(false);
     }
   };
@@ -63,13 +70,7 @@ const Register = () => {
             required
           />
         </div>
-        {error && <p>Registration failed</p>}
-        {success && 
-          <div>
-            <p>Registration was successful</p>
-            <Link to='/login'>log in here</Link>
-          </div>
-        }
+        {errors && <p>{errors}</p>}
         <button type="submit">Register</button>
       </form>
     </div>

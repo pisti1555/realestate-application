@@ -8,7 +8,7 @@ const Profile = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const getUser = async () => {
             try {
                 const response = await api.get('/user');
                 setUser(response.data);
@@ -19,7 +19,7 @@ const Profile = () => {
             }
         };
 
-        fetchUser();
+        getUser();
     }, [user]);
 
     if (loading) {

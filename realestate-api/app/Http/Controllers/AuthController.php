@@ -12,6 +12,13 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        if ($request->bearerToken()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Already logged in',
+            ]);
+        }
+
         try {
             $validate = Validator::make($request->all(), [
                 "email"=> ["required", "email"],
@@ -37,6 +44,8 @@ class AuthController extends Controller
             
             if (Hash::check($request->password, $user->password)) {
                 return response()->json([
+                        'status' => true,
+                        'message' => 'Success',
                         'token' => $user->createToken("Personal Access Token")->plainTextToken,
                         'user' => $user,
                     ], 200);
@@ -59,6 +68,15 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $existingUser = User::where('email', $request->email)->first();
+
+        if ($existingUser) {
+            return response()->json([
+                'status' => false,
+                'message' => 'A user with this email already exists.',
+            ]);
+        }
+
         try {
             $validate = Validator::make($request->all(), [
                 "name"=>["required", "string"],
@@ -69,7 +87,7 @@ class AuthController extends Controller
             if ($validate->fails()) {
                 return response()->json([
                     'status' => false,
-                    'message'=> 'validation error',
+                    'message'=> 'Validation error',
                     'errors' => $validate->errors(),
                 ], 401);
             }
@@ -81,6 +99,8 @@ class AuthController extends Controller
             ]);
     
             return response()->json([
+                'status' => true,
+                'message' => 'Success',
                 'token' => $user->createToken("Personal Access Token")->plainTextToken,
                 'user' => $user,
             ], 200);
