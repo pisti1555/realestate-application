@@ -1,25 +1,30 @@
 import axios from "axios";
 import api from './api';
+import NavBar from "../components/navbar/Navbar";
 
 
 export async function register(name:string, email:string, password:string) {
+    let authenticated = true;
     try {
-        if (localStorage.getItem('token')) {
-            const currentUser = await api.get('/user');
-            if (currentUser) {
-                return Promise.reject(new Error('Already logged in'));
-            }
+        const currentUser = await api.get('/user');
+        if (currentUser) {
+            return Promise.reject(new Error('Already logged in'));
         }
+    } catch (error) {
+        authenticated = false;
+    }
 
+    try {
+        if (authenticated) return;
         const response = await api.post('/register', {
                 name,
                 email,
                 password
             });
 
-        const { token, user } = response.data;
+        const token= response.data.token;
 
-        if (response.data.status == true) {
+        if (response.data.status === true) {
             localStorage.setItem('token', token);
         }
 
@@ -35,20 +40,23 @@ export async function register(name:string, email:string, password:string) {
 
 
 export async function login(email:string, password:string) {
+    let authenticated = true;
     try {
-        if (localStorage.getItem('token')) {
-            const currentUser = await api.get('/user');
-            if (currentUser) {
-                return Promise.reject(new Error('Already logged in'));
-            }
+        const currentUser = await api.get('/user');
+        if (currentUser) {
+            return Promise.reject(new Error('Already logged in'));
         }
-        
-        const response = await api.post('/login', { email, password });
-        const { token, user } = response.data;
+    } catch (error) {
+        authenticated = false;
+    }
 
-        if (response.data.status == true) {
+    try {
+        if (authenticated) return;
+        const response = await api.post('/login', { email, password });
+        const token = response.data.token;
+        if (response.data.status === true) {
             localStorage.setItem('token', token);
-       }
+        }
 
         return response.data;
     } catch (error:any) {

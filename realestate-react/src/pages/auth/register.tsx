@@ -1,34 +1,31 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../../services/auth';
-import "D:/Projektek/Laravel/realestate-application/realestate-react/src/css/auth/registration_page.css";
+import '../../css/auth/Registration.css';
 
-const Register = () => {
+const Register = ({ setUser }: { setUser: (user: any) => void }) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<string>('');
-  const [success, setSuccess] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (success) navigate('/welcome?registration-success');
-  }, [success]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
         const response = await register(name, email, password);
-        if (response.status == true) { 
-          setSuccess(true);
+        if (response.status === true) { 
           setErrors('');
+          console.log(response);
+          
+          setUser(response.user);
+          navigate('/welcome?registration-success');
         } else {
           setErrors(response.message);
         }
     } catch (error:any) {
       setErrors(error.message);
-      setSuccess(false);
     }
   };
   

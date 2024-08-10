@@ -1,34 +1,28 @@
 import React, { useState, useEffect,  FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth';
-import '../../css/auth/login_page.css';
+import '../../css/auth/Login.css';
 
-const Login = () => {
+const Login = ({ setUser }: { setUser: (user: any) => void }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<string>('');
-  const [success, setSuccess] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (success) navigate('/');
-  }, [success]);
-
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      if (response.status == true) { 
-        setSuccess(true);
+      if (response.status === true) { 
         setErrors('');
+        setUser(response.user);
+        navigate('/');
       } else {
         setErrors(response.message);
       }
     } catch (err:any) {
       setErrors(err.message);
-      setSuccess(false);
     }
   };
 
@@ -62,7 +56,6 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
     </div>
-
   );
 };
 

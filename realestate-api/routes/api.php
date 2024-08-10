@@ -14,7 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-Route::middleware(isAgent::class)->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('/properties', [PropertyController::class,'store'])->name('properties.store');
     Route::patch('/properties/{property}', [PropertyController::class,'update'])->name('properties.update');
     Route::delete('/properties/{property}', [PropertyController::class,'delete'])->name('properties.delete');

@@ -41,6 +41,7 @@ const Property_Index = () => {
         <>
             { 
                 <div>
+                    <a href={'/properties/edit/' + property.id}>Edit</a>
                     <h1>{property.title}</h1>
                     <h3>{property.price}</h3>
                     <p>{property.city}</p>

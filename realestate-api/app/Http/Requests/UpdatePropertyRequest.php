@@ -26,7 +26,7 @@ class UpdatePropertyRequest extends FormRequest
             'price' => ['required', 'numeric'],
             'description' => ['required', 'string', 'max:500'],
             'city' => ['required', 'string'],
-            'postal_code' => ['required', 'integer'],
+            'postal_code' => ['required', 'string'],
             'address' => ['required', 'string'],
         ];
     }
