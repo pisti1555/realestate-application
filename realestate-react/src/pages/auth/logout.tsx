@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../services/auth';
 
 const Logout = ({ setUser }: { setUser: (user: any) => void }) => {
-    const [errors, setErrors] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,20 +12,12 @@ const Logout = ({ setUser }: { setUser: (user: any) => void }) => {
                 setUser(null);
                 navigate('/login');
             } catch (error:any) {
-                setErrors(error.message);
+                navigate('/login');
             }
         };
 
         logOut();
-    }, [navigate]);
-
-    if (errors) {
-        return (
-            <div>
-                <p>{errors}</p>
-            </div>
-        );
-    }
+    }, []);
 
     return (
         <div>

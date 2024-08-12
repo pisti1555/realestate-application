@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePropertyRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\UpdatePropertyRequest;
 use App\Http\Resources\PropertyResource;
 use App\Models\Property;
-use App\Http\Requests\StorePropertyRequest;
-use App\Http\Requests\UpdatePropertyRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class PropertyController extends Controller
 
         if ($collection->count() == 0) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message'=> 'No properties found'
             ], 404);
         }
@@ -34,54 +35,13 @@ class PropertyController extends Controller
     public function store(StorePropertyRequest $request)
     {
         try {
-            if (!Auth::check()) {
-                return response()->json([
-                    'status'=> 'error',
-                    'message'=> 'Unauthorized'
-                ]);
-            }
+            $validated = $request->validated();
 
-            $user = Auth::user();
-            if (!$user) {
-                return response()->json([
-                    'status'=> 'error',
-                    'message'=> 'Couldnt find user'
-                ]);
-            }
+            $imgPath = $request->image->store('properties', 'public');
+            $validated['image'] = env('APP_URL') . '/storage/' . $imgPath;
 
-            if (!$user->isAgent()) {
-                return response()->json([
-                    'status'=> 'error',
-                    'message'=> 'No permission'
-                ]);
-            }
-
-            $validate = Validator::make($request->all(), [
-                "title"=>["required", "string"],
-                "price"=> ["required", "numeric"],
-                "city"=> ["required", "string"],
-                "postal_code"=> ["required", "string"],
-                "address"=> ["required", "string"],
-                "description"=> ["required", "string"],
-            ]);
-    
-            if ($validate->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message'=> 'Validation error',
-                    'errors' => $validate->errors(),
-                ], 401);
-            }
-    
-            $property = $user->properties()->create([
-                "title"=>$request->title,
-                "price"=> $request->price,
-                "city"=> $request->city,
-                "postal_code"=> $request->postal_code,
-                "address"=> $request->address,
-                "description"=> $request->description,
-            ]);
-    
+            $property = Auth::user()->properties()->create($validated);
+            
             return response()->json([
                 'status' => true,
                 'message' => 'Property stored successfully',
@@ -100,7 +60,7 @@ class PropertyController extends Controller
         $property = Property::find($id);
         if (!$property) {
             return response()->json([
-                'status'=> 'error',
+                'status'=> false,
                 'message'=> 'Property not found with the given ID'
             ], 404);
         }
@@ -108,10 +68,11 @@ class PropertyController extends Controller
         $resource = new PropertyResource($property);
         if (!$resource) {
             return response()->json([
-                'status'=> 'error',
+                'status'=> false,
                 'message'=> 'Resource could not be created from the given property'
             ], 404);
         }
+
         return $resource;
     }
 
@@ -121,60 +82,21 @@ class PropertyController extends Controller
     public function update(UpdatePropertyRequest $request, Property $property)
     {
         try {
-            if (!Auth::check()) {
+            if (!Auth::user()->properties->contains($property)) {
                 return response()->json([
-                    'status'=> 'error',
-                    'message'=> 'Unauthorized'
-                ], 401);
-            }
-
-            $user = Auth::user();
-            if (!$user) {
-                return response()->json([
-                    'status'=> 'error',
-                    'message'=> 'Couldnt find user'
-                ], 401);
-            }
-
-            if (!$user->isAgent()) {
-                return response()->json([
-                    'status'=> 'error',
-                    'message'=> 'No permission: not an agent'
-                ], 401);
-            }
-
-            if (!$user->properties->contains($property)) {
-                return response()->json([
-                    'status'=> 'error',
+                    'status'=> false,
                     'message'=> 'No permission: can not edit somebody elses property'
                 ], 401);
             }
 
-            $validate = Validator::make($request->all(), [
-                "title"=>["required", "string"],
-                "price"=> ["required", "numeric"],
-                "city"=> ["required", "string"],
-                "postal_code"=> ["required", "string"],
-                "address"=> ["required", "string"],
-                "description"=> ["required", "string"],
-            ]);
-    
-            if ($validate->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message'=> 'Validation error',
-                    'errors' => $validate->errors(),
-                ], 401);
+            $validated = $request->validated();
+
+            if ($request->image) {
+                $imgPath = $request->image->store('properties', 'public');
+                $validated['image'] = env('APP_URL') . '/storage/' . $imgPath;
             }
-    
-            $property->update([
-                "title"=>$request->title,
-                "price"=> $request->price,
-                "city"=> $request->city,
-                "postal_code"=> $request->postal_code,
-                "address"=> $request->address,
-                "description"=> $request->description,
-            ]);
+
+            $property->update($validated);
     
             return response()->json([
                 'status' => true,
@@ -191,6 +113,33 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        try {
+            if (!Auth::user()->properties->contains($property)) {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'No permission: Cannot delete somebody elses property'
+                ]);
+            }
+
+            $property->delete();
+        } catch (\Exception $e) {
+            return response()->json(["error"=> $e->getMessage()], 500);
+        }
+    }
+
+    public function isOwn(Property $property) {
+        try {
+            if (!Auth::user()->properties->contains($property)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Unexpected error'
+                ], 401);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unexpected error'
+            ]);
+        }
     }
 }

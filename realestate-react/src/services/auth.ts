@@ -1,25 +1,34 @@
-import axios from "axios";
 import api from './api';
-import NavBar from "../components/navbar/Navbar";
+import RegisterUserInterface from '../components/interface/auth/registerUserInterface';
+import RegisterAgentInterface from '../components/interface/auth/registerAgentInterface';
+import LoginInterface from '../components/interface/auth/login';
 
-
-export async function register(name:string, email:string, password:string) {
-    let authenticated = true;
+export async function registerUser(form:RegisterUserInterface) {
     try {
-        const currentUser = await api.get('/user');
-        if (currentUser) {
-            return Promise.reject(new Error('Already logged in'));
+        const response = await api.post('/register', form);
+
+        const token= response.data.token;
+
+        if (response.data.status === true) {
+            localStorage.setItem('token', token);
         }
-    } catch (error) {
-        authenticated = false;
-    }
 
+        return response.data;
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.message) {
+            throw new Error(error.response.data.message);
+        } else {
+            throw new Error('Registration failed');
+        }
+    }
+}
+
+export async function registerAgent(form:RegisterAgentInterface) {
     try {
-        if (authenticated) return;
-        const response = await api.post('/register', {
-                name,
-                email,
-                password
+        const response = await api.post('/register-agent', form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             });
 
         const token= response.data.token;
@@ -39,20 +48,9 @@ export async function register(name:string, email:string, password:string) {
 }
 
 
-export async function login(email:string, password:string) {
-    let authenticated = true;
+export async function login(form:LoginInterface) {
     try {
-        const currentUser = await api.get('/user');
-        if (currentUser) {
-            return Promise.reject(new Error('Already logged in'));
-        }
-    } catch (error) {
-        authenticated = false;
-    }
-
-    try {
-        if (authenticated) return;
-        const response = await api.post('/login', { email, password });
+        const response = await api.post('/login', form);
         const token = response.data.token;
         if (response.data.status === true) {
             localStorage.setItem('token', token);
@@ -70,12 +68,8 @@ export async function login(email:string, password:string) {
 
 export async function logout() {
     try {
-        if (!localStorage.getItem('token')) return Promise.reject(new Error('Already logged out'));
-        const currentUser = await api.get('/user');
-        if (currentUser) {
-            await api.post('/logout');
-            localStorage.removeItem('token');
-        }
+        await api.post('/logout');
+        localStorage.removeItem('token');
     } catch (error:any) {
         if (error.response && error.response.data && error.response.data.message) {
             throw new Error(error.response.data.message);

@@ -3,9 +3,11 @@ import { useState, useEffect, FormEvent} from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { createProperty } from "../../services/property";
+import { PropertyInterface_Store } from "../../components/interface/property/propertyInterface";
 
 const Property_Create = () => {
-    const [form, setForm] = useState<any>({
+    const [form, setForm] = useState<PropertyInterface_Store>({
+        image: null,
         title: '',
         price: 0,
         city: '',
@@ -29,7 +31,19 @@ const Property_Create = () => {
         }).finally(() => {
             setLoading(false);
         });
-    }, [success]);
+    }, []);
+
+    useEffect(() => {
+        if (success) {
+            navigate('/user?property-created-success');
+        }
+    }, [success, navigate]);
+    
+  const handleImage = (e:any) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setForm({...form, image: e.target.files[0]});
+    }
+  };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -63,14 +77,21 @@ const Property_Create = () => {
         );
     }
 
-    if (success) {
-        navigate('/user?property-created-success');
-    }
-
     return (
         <div className="container">
             <h1>Create a new property</h1>
             <form onSubmit={handleSubmit} className="form">
+                <div>
+                    <label htmlFor="image">Image</label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        onChange={handleImage}
+                        required
+                    />
+                </div>
                 <div>
                     <label htmlFor="title">Title</label>
                     <input
@@ -89,7 +110,7 @@ const Property_Create = () => {
                         id="price"
                         name="price"
                         value={form.price}
-                        onChange={(e) => setForm({...form, price:e.target.value})}
+                        onChange={(e) => setForm({...form, price: Number(e.target.value)})}
                         required
                     />
                 </div>

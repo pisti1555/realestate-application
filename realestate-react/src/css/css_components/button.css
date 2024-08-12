@@ -1,33 +1,19 @@
-
-.link-button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  background-color: #345edb;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.1s ease;
-}
-
-.link-button:hover {
-  background-color: #1414bb;
-}
-
-
-
 .button {
+  display: inline-block;
+  text-decoration: none;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #1b2aff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.1s ease;
+  border: 1px solid #1520b5;
+  box-shadow: 0px 0px 5px #00000072;
 }
 
 .button:hover {
-  background-color: #45a049;
+  background-color: #060286;
 }
 
 .button:disabled {

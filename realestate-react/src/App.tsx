@@ -1,18 +1,16 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './services/api';
-import user from './components/User';
 
 import NavBar from './components/navbar/Navbar';
 
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import Logout from './pages/auth/Logout';
+import Login from './pages/auth/login';
+import Register from './pages/auth/register';
+import Logout from './pages/auth/logout';
 
-import Home from './pages/Home';
-import Welcome from './pages/Welcome';
-import Profile from './pages/Profile';
+import Home from './pages/home';
+import Welcome from './pages/welcome';
+import Profile from './pages/profile';
 
 import Property_Index from './pages/properties/property_index';
 import Property_Show from './pages/properties/property_show';
