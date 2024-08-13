@@ -18,6 +18,7 @@ class PropertyFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1,3),
+            'image' => 'https://picsum.photos/1920/1080',
             'title' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2,100,999999),
             'description' => $this->faker->sentence,

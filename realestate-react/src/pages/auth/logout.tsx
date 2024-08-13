@@ -2,31 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../services/auth';
 
-const Logout = () => {
-
-    const [errors, setErrors] = useState<string>('');
+const Logout = ({ setUser }: { setUser: (user: any) => void }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
         const logOut = async () => {
-        try {
-            await logout();
-            navigate('/login');
-        } catch (error:any) {
-            setErrors(error.message);
-        }
+            try {
+                await logout();
+                setUser(null);
+                navigate('/login');
+            } catch (error:any) {
+                navigate('/login');
+            }
         };
 
         logOut();
-    }, [navigate]);
-
-    if (errors) {
-        return (
-            <div>
-                <p>{errors}</p>
-            </div>
-        );
-    }
+    }, []);
 
     return (
         <div>

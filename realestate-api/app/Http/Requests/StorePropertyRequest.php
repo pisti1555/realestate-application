@@ -11,7 +11,7 @@ class StorePropertyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->tokenCan('store-property');
     }
 
     /**
@@ -22,11 +22,12 @@ class StorePropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'image'=> ['required', 'image', 'mimes:jpeg, jpg'],
             'title' => ['required', 'string', 'min:1', 'max:30'],
             'price' => ['required', 'numeric'],
             'description' => ['required', 'string', 'max:500'],
             'city' => ['required', 'string'],
-            'postal_code' => ['required', 'integer'],
+            'postal_code' => ['required', 'string'],
             'address' => ['required', 'string'],
         ];
     }

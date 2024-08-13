@@ -11,7 +11,7 @@ class UpdatePropertyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->tokenCan('update-property');
     }
 
     /**
@@ -22,12 +22,13 @@ class UpdatePropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'min:1', 'max:30'],
-            'price' => ['required', 'numeric'],
-            'description' => ['required', 'string', 'max:500'],
-            'city' => ['required', 'string'],
-            'postal_code' => ['required', 'integer'],
-            'address' => ['required', 'string'],
+            'image'=> ['sometimes', 'image', 'mimes:jpeg, jpg'],
+            'title' => ['sometimes', 'string', 'min:1', 'max:30'],
+            'price' => ['sometimes', 'numeric'],
+            'description' => ['sometimes', 'string', 'max:500'],
+            'city' => ['sometimes', 'string'],
+            'postal_code' => ['sometimes', 'string'],
+            'address' => ['sometimes', 'string'],
         ];
     }
 }

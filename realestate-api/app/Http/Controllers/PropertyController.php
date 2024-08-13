@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePropertyRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\UpdatePropertyRequest;
 use App\Http\Resources\PropertyResource;
 use App\Models\Property;
-use App\Http\Requests\StorePropertyRequest;
-use App\Http\Requests\UpdatePropertyRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -18,7 +21,7 @@ class PropertyController extends Controller
 
         if ($collection->count() == 0) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message'=> 'No properties found'
             ], 404);
         }
@@ -27,30 +30,37 @@ class PropertyController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StorePropertyRequest $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+
+            $imgPath = $request->image->store('properties', 'public');
+            $validated['image'] = env('APP_URL') . '/storage/' . $imgPath;
+
+            $property = Auth::user()->properties()->create($validated);
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'Property stored successfully',
+                'property' => $property,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(["error"=> $e->getMessage()], 500);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Property $property)
+    public function show(string $id)
     {
-        $property = Property::find($property->id);
+        $property = Property::find($id);
         if (!$property) {
             return response()->json([
-                'status'=> 'error',
+                'status'=> false,
                 'message'=> 'Property not found with the given ID'
             ], 404);
         }
@@ -58,19 +68,12 @@ class PropertyController extends Controller
         $resource = new PropertyResource($property);
         if (!$resource) {
             return response()->json([
-                'status'=> 'error',
+                'status'=> false,
                 'message'=> 'Resource could not be created from the given property'
             ], 404);
         }
-        return $resource;
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Property $property)
-    {
-        //
+        return $resource;
     }
 
     /**
@@ -78,7 +81,31 @@ class PropertyController extends Controller
      */
     public function update(UpdatePropertyRequest $request, Property $property)
     {
-        //
+        try {
+            if (!Auth::user()->properties->contains($property)) {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'No permission: can not edit somebody elses property'
+                ], 401);
+            }
+
+            $validated = $request->validated();
+
+            if ($request->image) {
+                $imgPath = $request->image->store('properties', 'public');
+                $validated['image'] = env('APP_URL') . '/storage/' . $imgPath;
+            }
+
+            $property->update($validated);
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Property updated successfully',
+                'property' => $property,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(["error"=> $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -86,6 +113,33 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        try {
+            if (!Auth::user()->properties->contains($property)) {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'No permission: Cannot delete somebody elses property'
+                ]);
+            }
+
+            $property->delete();
+        } catch (\Exception $e) {
+            return response()->json(["error"=> $e->getMessage()], 500);
+        }
+    }
+
+    public function isOwn(Property $property) {
+        try {
+            if (!Auth::user()->properties->contains($property)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Unexpected error'
+                ], 401);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unexpected error'
+            ]);
+        }
     }
 }

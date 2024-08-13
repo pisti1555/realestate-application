@@ -1,34 +1,31 @@
 import React, { useState, useEffect,  FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth';
-import '../../css/auth/login_page.css';
+import LoginInterface from '../../components/interface/auth/login';
+import '../../css/auth/Login.css';
 
-const Login = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+const Login = ({ setUser }: { setUser: (user: any) => void }) => {
+  const [form, setForm] = useState<LoginInterface>({
+    email: '',
+    password: ''
+  });
+
   const [errors, setErrors] = useState<string>('');
-  const [success, setSuccess] = useState<boolean>(false);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (success) navigate('/');
-  }, [success]);
-
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await login(email, password);
-      if (response.status == true) { 
-        setSuccess(true);
+      const response = await login(form);
+      if (response.status === true) { 
         setErrors('');
+        setUser(response.user);
+        navigate('/');
       } else {
         setErrors(response.message);
       }
     } catch (err:any) {
       setErrors(err.message);
-      setSuccess(false);
     }
   };
 
@@ -42,8 +39,8 @@ const Login = () => {
             type="email"
             id="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={(e) => setForm({...form, email: e.target.value})}
             required
           />
         </div>
@@ -53,8 +50,8 @@ const Login = () => {
             type="password"
             id="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={form.password}
+            onChange={(e) => setForm({...form, password: e.target.value})}
             required
           />
         </div>
@@ -62,7 +59,6 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
     </div>
-
   );
 };
 

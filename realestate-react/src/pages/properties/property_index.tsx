@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import '../../css/PropertyIndex.css';
 
 const Property_Index = () => {
     const [properties, setProperties] = useState<any[]>([]);
@@ -38,18 +39,20 @@ const Property_Index = () => {
 
     return (
         <>
-            <ul>
+            <ul className="list">
                 {properties.map((property: any) => (
-                    <li key={property.id}>
-                        <Link to={'/properties/' + property.id}>
-                            <h1>{property.title}</h1>
-                            <h3>{property.price}</h3>
-                            <p>{property.city}</p>
-                            <p>{property.postal_code}</p>
-                            <p>{property.address}</p>
-                            <p>{property.description}</p>
-                        </Link>
-                        
+                    <li key={property.id} className="item">
+                        <div className="content">
+                            <img src={property.image} />
+                            <div className="info">
+                                <strong>{property.title}</strong>
+                                <p>Price: {property.price}$</p>
+                                <p>Location: {property.city}, {property.postal_code}</p>
+                            </div>
+                        </div>
+                        <div className="btn-container">
+                            <Link to={'/properties/' + property.id} className="button shadow-br">Show</Link>
+                        </div>
                     </li>
                 ))}
             </ul>

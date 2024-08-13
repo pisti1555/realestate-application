@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'phone',
     ];
 
     /**
@@ -46,9 +48,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function isAgent()
+    public function hasRole($role): bool
     {
-        return $this->role == 'agent';
+        return $this->role == $role;
     }
 
     public function properties()
