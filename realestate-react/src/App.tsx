@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './services/api';
-
 import NavBar from './components/navbar/Navbar';
 
 import Login from './pages/auth/login';
@@ -18,12 +17,11 @@ import Property_Create from './pages/properties/property_create';
 import Property_Edit from './pages/properties/property_edit';
 
 function App() {
-  const [name, setName] = useState<string>('Guest');
   const [user, setUser] = useState<any>(null);
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
     const getUser = async () => {
+      if (!localStorage.getItem('token')) return;
       try {
         const response = await api.get('/user');
         if (response.status === 200) {
@@ -42,7 +40,6 @@ function App() {
 
   return (
     <Router>
-      
       <NavBar user={user} />
 
       <Routes>

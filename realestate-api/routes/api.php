@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PropertyController;
 
-Route::post('/register', [AuthController::class,'register'])->name('register');
-Route::post('/register-agent', [AuthController::class,'registerAgent'])->name('register-agent');
-Route::post('/login', [AuthController::class,'login'])->name('login');
+Route::middleware('unauth')->group(function () {
+    Route::post('/register', [AuthController::class,'register'])->name('register');
+    Route::post('/register-agent', [AuthController::class,'registerAgent'])->name('register-agent');
+    Route::post('/login', [AuthController::class,'login'])->name('login');
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class,'logout'])->name('logout');
