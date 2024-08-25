@@ -3,7 +3,9 @@ import { useState, useEffect, FormEvent} from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { createProperty } from "../../services/property";
-import { PropertyInterface_Store } from "../../components/interface/property/propertyInterface";
+import { PropertyInterface_Store } from "../../interface/property/propertyInterface";
+import Loading from "../../components/pages/loading/Loading";
+import ErrorPage from "../../components/pages/error/Error";
 
 const Property_Create = () => {
     const [form, setForm] = useState<PropertyInterface_Store>({
@@ -25,7 +27,7 @@ const Property_Create = () => {
 
     useEffect(() => {
         api.get('/user').then(response => {
-            if (response.data.role == 'agent') setPermission(true);
+            if (response.data.role === 'agent') setPermission(true);
         }).catch((error) => {
             setErrors(error.message);
         }).finally(() => {
@@ -49,7 +51,7 @@ const Property_Create = () => {
         e.preventDefault();
         try {
         const response = await createProperty(form);
-        if (response.status == true) {
+        if (response.status === true) {
             setErrors('');
             setSuccess(true);
         } else {
@@ -63,17 +65,13 @@ const Property_Create = () => {
 
     if (loading) {
         return (
-            <div>
-                <p>Loading...</p>
-            </div>
+            <Loading />
         );
     }
 
     if (!permission) {
         return (
-            <div>
-                <p>You do not have permission to visit this page</p>
-            </div>
+            <ErrorPage errors={"You do not have permission to visit this page"} />
         );
     }
 

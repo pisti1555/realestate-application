@@ -2,10 +2,10 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { validateRegistrationForm } from '../../services/validate';
 import { register } from '../../services/auth';
-import { Image, Person, Mail, Call, Lock, Password } from '@mui/icons-material';
-import { grey } from '@mui/material/colors';
+import { Image, Person, Mail, Call, Lock } from '@mui/icons-material';
 import '../../css/Auth.css';
-import RegistrationInterface from '../../components/interface/auth/registerInterface';
+import { AuthButton } from '../../components/buttons/Buttons';
+import RegistrationInterface from '../../interface/auth/registerInterface';
 
 const Register = ({ setUser }: { setUser: (user: any) => void }) => {
   const [type, setType] = useState<number>(1);
@@ -114,7 +114,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
           <div className="group-container">
             <div  className={errors.image?"invalid":"group"}>
               <label htmlFor="image_input">
-                <Image sx={{ color: grey[300] }}></Image>
+                <Image />
               </label>
               <input 
                 type="file" 
@@ -129,7 +129,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         <div className="group-container">
           <div className={errors.name?"invalid":"group"}>
             <label htmlFor="name_input">
-              <Person sx={{ color: grey[300] }}></Person>
+              <Person />
             </label>
             <input
               type="text"
@@ -146,7 +146,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         <div className="group-container">
           <div className={errors.email?"invalid":"group"}>
             <label htmlFor="email_input">
-              <Mail sx={{ color: grey[300] }}></Mail>
+              <Mail />
             </label>
             <input
               type="email"
@@ -164,7 +164,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
           <div className="group-container">
             <div className={errors.phone?"invalid":"group"}>
               <label htmlFor="phone_input">
-                <Call sx={{ color: grey[300] }}></Call>
+                <Call />
               </label>
               <input
                 type="text"
@@ -182,7 +182,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         <div className="group-container">
           <div className={errors.password?"invalid":"group"}>
             <label htmlFor="password_input">
-              <Lock sx={{ color: grey[300] }}></Lock>
+              <Lock />
             </label>
             <input
               type="password"
@@ -199,7 +199,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         <div className="group-container">
             <div className={errors.password_confirm?"invalid":"group"}>
               <label htmlFor="password_confirm_input">
-                <Lock sx={{ color: grey[300] }}></Lock>
+                <Lock />
               </label>
               <input 
                 type="password" 
@@ -212,14 +212,14 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
             {errors.password_confirm && <p className='error-text'>{errors.password_confirm}</p>}
           </div>
         
-        <button type="submit">Register</button>
+          <AuthButton text="Register" />
 
         {submitError && <p>{submitError}</p>}
 
         {type === 1 ? (
-          <p>If you would like to register as an agent <a onClick={() => {reset(2)}}>click here</a></p>
+          <p>If you would like to register as an agent <span className='redirect' onClick={() => {reset(2)}}>click here</span></p>
         ) : (
-          <p>If you would like to register as a user <a onClick={() => {reset(1)}}>click here</a></p>
+          <p>If you would like to register as a user <span className='redirect' onClick={() => {reset(1)}}>click here</span></p>
         )}
         
         <p>If you already have an account <Link to='/login'>login here</Link></p>

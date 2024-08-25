@@ -1,5 +1,5 @@
 import api from "./api";
-import { PropertyInterface_Store } from "../components/interface/property/propertyInterface";
+import { PropertyInterface_Store } from "../interface/property/propertyInterface";
 
 export async function createProperty(form:PropertyInterface_Store) {
   try {

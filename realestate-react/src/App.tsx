@@ -15,6 +15,8 @@ import Property_Index from './pages/properties/property_index';
 import Property_Show from './pages/properties/property_show';
 import Property_Create from './pages/properties/property_create';
 import Property_Edit from './pages/properties/property_edit';
+import Property_Search from './pages/properties/search_property';
+
 
 function App() {
   const [user, setUser] = useState<any>(null);
@@ -56,6 +58,8 @@ function App() {
         <Route path="/properties/:id" element={<Property_Show />} />
         <Route path="/properties/create" element={<Property_Create />} />
         <Route path="/properties/edit/:id" element={<Property_Edit />} />
+        <Route path="/search" element={<Property_Search />} />
+        <Route path="/search/:params" element={<Property_Search />} />
 
       </Routes>
     </Router>

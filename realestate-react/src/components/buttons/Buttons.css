@@ -1,0 +1,38 @@
+:root {
+  --main-color: #00297a;
+  --error-color: #b80000;
+}
+
+.submit-button {
+  background: (--main-color);
+  color: #ffffff;
+  font-weight: 600;
+  border: 2px solid #00297a;
+  border-radius: 1em;
+}
+.submit-button:hover {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+}
+
+
+
+.auth-button {
+  background: var(--main-color);
+  color: #ffffff;
+  font-size: 1em;
+  padding: 0.5em;
+  padding-inline: 1em;
+  border: 2px solid var(--main-color);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.auth-button:hover,
+.auth-button:active {
+  background: #ffffff;
+  border-color: #000000;
+  color: #000000;
+}

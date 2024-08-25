@@ -1,19 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import '../components/buttons/Buttons.css';
 
 :root {
-  --main-color: #41295a;
+  --main-color: #00297a;
   --error-color: #b80000;
+  --error-svg: #400000;
 }
 
 *{
   font-family: Nunito, Arial, Helvetica, sans-serif;
 }
 
+form .redirect,
 form a {
   color: #000000;
   text-decoration: underline;
   cursor: pointer;
 }
+form .redirect:hover,
 form a:hover {
   text-shadow: 1px 0 4px#000000;
 }
@@ -24,7 +28,7 @@ form a:hover {
   justify-content: flex-end;
   margin: 0;
   padding: 0;
-  background-image: url('../components/images/auth.jpg');
+  background-image: url('../images/auth.jpg');
   background-size: cover;
   min-height: 100vh;
   width: 100%;
@@ -93,7 +97,9 @@ form h1 {
   align-items: center;
   justify-content: center;
   background-color: var(--main-color);
+  color: #ffffff;
 }
+
 .group input {
   box-sizing: border-box;
   height: 100%;
@@ -114,29 +120,6 @@ form h1 {
   border-right: none;
 }
 
-form button {
-  background: var(--main-color);
-  color: #e0e0e0;
-  font-size: 1em;
-  padding: 0.5em;
-  padding-inline: 1em;
-  border: 2px solid var(--main-color);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-
-form button:hover,
-form button:active {
-  background: #e8e8e8;
-  border-color: #000000;
-  color: #000000;
-}
-
-
-
-
 .invalid {
   display: flex;
   align-items: center;
@@ -154,6 +137,7 @@ form button:active {
   align-items: center;
   justify-content: center;
   background-color: var(--error-color);
+  color: #300000;
 }
 .invalid input {
   box-sizing: border-box;

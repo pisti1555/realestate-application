@@ -1,0 +1,13 @@
+.error-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #6f0000;
+  color: #ffffff;
+}
+
+.error-page h1 {
+  max-width: 80vw;
+}

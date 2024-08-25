@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ErrorPage from "../../components/pages/error/Error";
+import Loading from "../../components/pages/loading/Loading";
 import api from "../../services/api";
 
 const Property_Index = () => {
@@ -30,11 +32,15 @@ const Property_Index = () => {
     }, []);
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <Loading />
+        );
     }
 
     if (errors) {
-        return <p>{errors}</p>;
+        return (
+            <ErrorPage errors={errors} />
+        );
     }
 
     return (

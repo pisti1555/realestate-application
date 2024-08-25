@@ -1,11 +1,11 @@
 import React, { useState, useEffect,  FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth';
-import LoginInterface from '../../components/interface/auth/login';
+import LoginInterface from '../../interface/auth/login';
 import '../../css/Auth.css';
 import { Lock, Mail } from '@mui/icons-material';
-import { grey } from '@mui/material/colors';
 import { validateLoginForm } from '../../services/validate';
+import { AuthButton } from '../../components/buttons/Buttons';
 
 const Login = ({ setUser }: { setUser: (user: any) => void }) => {
   const [form, setForm] = useState<LoginInterface>({
@@ -67,7 +67,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
           <div className="group-container">
             <div className={!valid?"invalid":"group"}>
               <label htmlFor="email_input">
-                <Mail sx={{ color: grey[300] }}></Mail>
+                <Mail />
               </label>
               <input 
                 type="email" 
@@ -83,7 +83,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
           <div className="group-container">
             <div className={!valid?"invalid":"group"}>
               <label htmlFor="password_input">
-                <Lock sx={{ color: grey[300] }}></Lock>
+                <Lock />
               </label>
               <input 
                 type="password" 
@@ -96,7 +96,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
             {errors.password && <p className='error-text'>{errors.password}</p>}
           </div>
           
-          <button type="submit">Login</button>
+          <AuthButton text="Login" />
           {submitError && <p className='error-text'>{submitError}</p>}
           <p>or if you do not have an account, <Link to="/register">register here</Link></p>
         </form>
