@@ -4,7 +4,6 @@ import { validateRegistrationForm } from '../../services/validate';
 import { register } from '../../services/auth';
 import { Image, Person, Mail, Call, Lock } from '@mui/icons-material';
 import '../../css/Auth.css';
-import { AuthButton } from '../../components/buttons/Buttons';
 import RegistrationInterface from '../../interface/auth/registerInterface';
 
 const Register = ({ setUser }: { setUser: (user: any) => void }) => {
@@ -212,7 +211,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
             {errors.password_confirm && <p className='error-text'>{errors.password_confirm}</p>}
           </div>
         
-          <AuthButton text="Register" />
+          <button type="submit" className="auth-button">Register</button>
 
         {submitError && <p>{submitError}</p>}
 

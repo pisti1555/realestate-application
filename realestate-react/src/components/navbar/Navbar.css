@@ -1,7 +1,7 @@
 .navbar,
 .navbar-closed {
   position: fixed;
-  z-index: 1000;
+  z-index: 100;
   left: 0;
   top: 0;
   height: 100vh;
@@ -12,7 +12,7 @@
   align-items: center;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  transition: width 0.5s ease;
+  transition: width 0.5s ease, height 0.5s ease;
 }
 .navbar {
   width: 20em;
@@ -124,5 +124,77 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 1200px) {
+  .navbar,
+  .navbar-closed {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #001121;
+    display: flex;
+
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: height 0.5s ease;
+    overflow: hidden;
+  }
+
+  .navbar {
+    height: 100%;
+    min-height: 90vh;
+    flex-direction: column;
+  }
+
+  .navbar-closed {
+    height: fit-content;
+    flex-direction: row;
+  }
+
+  .navbar .menu-button,
+  .navbar-closed .menu-button {
+    padding: 0.5em;
+    margin: 0;
+    width: auto;
+    height: auto;
+  }
+
+  .navbar .option,
+  .navbar-closed .option {
+    padding: 0.5em;
+    margin: 0;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+  }
+
+  .navbar-closed .option {
+    border-radius: 0;
+  }
+
+
+  .navbar-closed .option p {
+    display: none;
+  }
+  
+  .navbar .option svg,
+  .navbar-closed .option svg {
+    margin: 0;
+    padding: 0;
+    width: 0.8em;
+    height: 0.8em;
+  }
+
+  .menu-button:hover,
+  .option:hover {
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
 
 

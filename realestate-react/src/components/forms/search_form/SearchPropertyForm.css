@@ -1,3 +1,5 @@
+@import '/src/css/Buttons.css';
+
 .search-form {
   position: absolute;
   top: 0;
@@ -120,4 +122,8 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   position: relative;
   outline: none;
+}
+
+.search-form .button-container {
+  width: 100%;
 }

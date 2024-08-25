@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import '../components/buttons/Buttons.css';
+@import '../css/Buttons.css';
 
 :root {
   --main-color: #00297a;
@@ -21,6 +21,9 @@ form .redirect:hover,
 form a:hover {
   text-shadow: 1px 0 4px#000000;
 }
+form p {
+  text-align: center;
+}
 
 .auth-main-container {
   display: flex;
@@ -32,15 +35,6 @@ form a:hover {
   background-size: cover;
   min-height: 100vh;
   width: 100%;
-}
-
-#home-link {
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: 3em;
-  margin-top: 5em;
-  font-size: 1em;
 }
 
 .welcome {
@@ -168,17 +162,13 @@ form h1 {
 
 
 
-@media(max-width: 1280px) {
+@media(max-width: 1200px) {
   *{
-    font-size: x-large;
+    font-size: large;
   }
 
   .welcome {
     display: none;
-  }
-
-  h1 {
-    font-size: 2em;
   }
 
   form {
@@ -187,6 +177,5 @@ form h1 {
 
   .group {
     width: 80%;
-    height: 4em;
   }
 }

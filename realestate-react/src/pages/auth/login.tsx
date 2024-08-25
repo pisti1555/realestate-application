@@ -5,7 +5,6 @@ import LoginInterface from '../../interface/auth/login';
 import '../../css/Auth.css';
 import { Lock, Mail } from '@mui/icons-material';
 import { validateLoginForm } from '../../services/validate';
-import { AuthButton } from '../../components/buttons/Buttons';
 
 const Login = ({ setUser }: { setUser: (user: any) => void }) => {
   const [form, setForm] = useState<LoginInterface>({
@@ -96,7 +95,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
             {errors.password && <p className='error-text'>{errors.password}</p>}
           </div>
           
-          <AuthButton text="Login" />
+          <button type="submit" className="auth-button">Login</button>
           {submitError && <p className='error-text'>{submitError}</p>}
           <p>or if you do not have an account, <Link to="/register">register here</Link></p>
         </form>

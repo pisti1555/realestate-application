@@ -50,8 +50,7 @@ function App() {
         <Route path="/logout" element={<Logout setUser={setUser} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
 
-        <Route path="/" element={<Home />} />
-        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/user" element={<Profile />} />
 
         <Route path="/properties" element={<Property_Index />} />

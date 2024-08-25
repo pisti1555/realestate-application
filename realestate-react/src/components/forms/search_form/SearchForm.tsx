@@ -2,7 +2,6 @@ import React from "react";
 import { FormEvent } from "react";
 import { Search } from "@mui/icons-material";
 import { useState } from "react";
-import { SubmitButton } from "../../buttons/Buttons";
 import '../search_form/SearchPropertyForm.css';
 
 const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -91,7 +90,7 @@ export const SearchPropertyForm = () => {
         </select>
       </div>
       <div className="button-container">
-        <SubmitButton text="Search" />
+        <button type="submit" className="submit-button">Search</button>
       </div>
     </form>
   );
