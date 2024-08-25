@@ -3,7 +3,9 @@ import { useState, useEffect, FormEvent} from "react";
 import api from "../../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { editProperty } from "../../services/property";
-import { PropertyInterface_Store } from "../../components/interface/property/propertyInterface";
+import { PropertyInterface_Store } from "../../interface/property/propertyInterface";
+import ErrorPage from "../../components/pages/error/Error";
+import Loading from "../../components/pages/loading/Loading";
 
 
 const Property_Edit = () => {
@@ -38,7 +40,7 @@ const Property_Edit = () => {
         api.get('/properties/' + id)
         .then(
             response => {
-                if (response.status == 200) {
+                if (response.status === 200) {
                     const data = response.data.data;
                     setForm({
                         image:null, 
@@ -56,7 +58,7 @@ const Property_Edit = () => {
         }).finally(() => {
             setLoading(false);
         });
-    }, []);
+    });
 
     useEffect(() => {
         if (success) {
@@ -74,7 +76,7 @@ const Property_Edit = () => {
         e.preventDefault();
         try {
         const response = await editProperty(id??'', form);
-        if (response.status == true) {
+        if (response.status === true) {
             setErrors('');
             setSuccess(true);
         } else {
@@ -90,17 +92,13 @@ const Property_Edit = () => {
 
     if (loading) {
         return (
-            <div>
-                <p>Loading...</p>
-            </div>
+            <Loading />
         );
     }
 
     if (!permission) {
         return (
-            <div>
-                <p>You do not have permission to visit this page</p>
-            </div>
+            <ErrorPage errors={"You do not have permission to visit this page"} />
         );
     }
 

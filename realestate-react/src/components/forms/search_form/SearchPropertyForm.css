@@ -1,0 +1,129 @@
+@import '/src/css/Buttons.css';
+
+.search-form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 20vw;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1em;
+  background-color: #0084d6;
+}
+
+.search-form .text-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+}
+.search-form .text-search-container .text-input-container {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 5em;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+.search-form .text-search-container .text-input-container svg {
+  border: 1px solid black;
+  border-right: none;
+  padding: 0.5em;
+  background: #00297a;
+  border-top-left-radius: 5em;
+  border-bottom-left-radius: 5em;
+  color: #ffffff;
+}
+.search-form .text-search-container .text-input-container input {
+  width: 80%;
+  outline: none;
+  border: 1px solid black;
+  border-left: none;
+  padding: 0.5em;
+  background: #ffffff;
+  border-top-right-radius: 5em;
+  border-bottom-right-radius: 5em;
+  font-size: 1em;
+}
+
+.search-form .range-container {
+  width: 100%;
+  padding: 1em;
+}
+
+.search-form .range-container .price-range-container,
+.search-form .range-container .rating-range-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+
+.search-form .range-container .price-range-container .range-values,
+.search-form .range-container .rating-range-container .range-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-form .range-container .range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1em;
+  background: #d3d3d3;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  margin-bottom: 0.5em;
+}
+
+.search-form .range-container .range-input:hover {
+  opacity: 1;
+}
+
+.search-form .range-container .range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #00297a;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.search-form .order-by-container {
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form .order-by-container label {
+  font-weight: bold;
+  font-size: 1em;
+  text-wrap: nowrap;
+  margin-bottom: 0.5em;
+}
+
+.search-form .order-by-container select {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #ffffff;
+  appearance: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  outline: none;
+}
+
+.search-form .button-container {
+  width: 100%;
+}

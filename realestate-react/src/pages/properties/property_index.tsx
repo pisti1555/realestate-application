@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 import '../../css/PropertyIndex.css';
+import Loading from "../../components/pages/loading/Loading";
+import ErrorPage from "../../components/pages/error/Error";
 
 const Property_Index = () => {
     const [properties, setProperties] = useState<any[]>([]);
@@ -30,32 +32,42 @@ const Property_Index = () => {
     }, []);
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <Loading />
+        );
     }
 
     if (errors) {
-        return <p>{errors}</p>;
+        return (
+            <ErrorPage errors={errors} />
+        );
     }
 
     return (
         <>
-            <ul className="list">
-                {properties.map((property: any) => (
-                    <li key={property.id} className="item">
-                        <div className="content">
-                            <img src={property.image} />
-                            <div className="info">
-                                <strong>{property.title}</strong>
-                                <p>Price: {property.price}$</p>
-                                <p>Location: {property.city}, {property.postal_code}</p>
+            {properties? (
+                <ul className="list">
+                    {properties.map((property: any) => (
+                        <li key={property.id} className="item">
+                            <div className="content">
+                                <img src={property.image} />
+                                <div className="info">
+                                    <strong>{property.title}</strong>
+                                    <p>Price: {property.price}$</p>
+                                    <p>Location: {property.city}, {property.postal_code}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="btn-container">
-                            <Link to={'/properties/' + property.id} className="button shadow-br">Show</Link>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                            <div className="btn-container">
+                                <Link to={'/properties/' + property.id} className="button shadow-br">Show</Link>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <div className="not-found">
+                    <h1>No properties found</h1>
+                </div>
+            )}
         </>
     );
 }

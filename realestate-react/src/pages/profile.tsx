@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import '../css/Profile.css';
+import Loading from "../components/pages/loading/Loading";
+import ErrorPage from "../components/pages/error/Error";
 
 const Profile = () => {
 
@@ -25,15 +27,21 @@ const Profile = () => {
     }, []);
 
     if (loading) {
-        return <div className="msg loading">Loading...</div>;
+        return (
+            <Loading />
+        );
     }
 
     if (error) {
-        return <div className="msg error">{error}</div>;
+        return (
+            <ErrorPage errors={error} />
+        );
     }
 
     if (!user) {
-        return <div className="msg not-found">No user found</div>;
+        return (
+            <ErrorPage errors={"No user found on this link"} />
+        );
     }
 
     if (user.role == 'agent') {
