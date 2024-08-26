@@ -1,0 +1,10 @@
+@import '../property_search/PropertyResults.css';
+@import '../property_search/SearchPropertyForm.css';
+
+.property-search-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}

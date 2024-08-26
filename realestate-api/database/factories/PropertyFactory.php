@@ -21,6 +21,7 @@ class PropertyFactory extends Factory
             'image' => 'https://picsum.photos/1920/1080',
             'title' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2,100,999999),
+            'rating' => $this->faker->randomFloat(1,1,5),
             'description' => $this->faker->sentence,
             'city' => $this->faker->city,
             'postal_code'=> $this->faker->postcode,

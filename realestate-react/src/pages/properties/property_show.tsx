@@ -29,7 +29,7 @@ const Property_Index = () => {
             .finally(() => {
                 setLoading(false);  
             });
-    }, []);
+    });
 
     if (loading) {
         return (
@@ -48,7 +48,7 @@ const Property_Index = () => {
             { 
                 <div>
                     <a href={'/properties/edit/' + property.id}>Edit</a>
-                    <img src={property.image} />
+                    <img src={property.image} alt="" />
                     <h1>{property.title}</h1>
                     <h3>{property.price}$</h3>
                     <p>{property.city}</p>

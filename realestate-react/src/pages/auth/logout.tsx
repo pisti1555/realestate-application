@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../services/auth';
 
@@ -17,7 +17,7 @@ const Logout = ({ setUser }: { setUser: (user: any) => void }) => {
         };
 
         logOut();
-    }, []);
+    });
 
     return (
         <div>

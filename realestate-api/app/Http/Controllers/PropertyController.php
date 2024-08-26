@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchPropertyRequest;
 use App\Http\Requests\StorePropertyRequest;
-use Illuminate\Http\Request;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Http\Resources\PropertyResource;
 use App\Models\Property;
-use Illuminate\Support\Facades\Validator;
+use App\Services\SearchService;
 use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
@@ -141,5 +141,9 @@ class PropertyController extends Controller
                 'message' => 'Unexpected error'
             ]);
         }
+    }
+
+    public function searchProperty(SearchPropertyRequest $request) {
+        return SearchService::searchProperty($request);
     }
 }

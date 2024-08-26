@@ -44,14 +44,14 @@ const Profile = () => {
         );
     }
 
-    if (user.role == 'agent') {
+    if (user.role === 'agent') {
         return (
             <div className="container">
                 <div className="right">
                     <Link to='/properties/create' className="link-button">Create a property</Link>
                 </div>
                 <div className="header">
-                    <img src={user.image} />
+                    <img src={user.image} alt="" />
                     <h1>{user.name}</h1>
                     <p>{user.email}</p>
                     <p>{user.phone}</p>

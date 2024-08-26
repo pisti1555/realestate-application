@@ -8,14 +8,13 @@ import Register from './pages/auth/register';
 import Logout from './pages/auth/logout';
 
 import Home from './pages/home';
-import Welcome from './pages/welcome';
 import Profile from './pages/profile';
 
 import Property_Index from './pages/properties/property_index';
 import Property_Show from './pages/properties/property_show';
 import Property_Create from './pages/properties/property_create';
 import Property_Edit from './pages/properties/property_edit';
-import Property_Search from './pages/properties/search_property';
+import Property_Search from './pages/properties/property_search';
 
 
 function App() {

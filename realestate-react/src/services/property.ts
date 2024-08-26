@@ -41,3 +41,32 @@ export async function editProperty(
     throw new Error(error.response.data.message);
   }
 }
+
+export const searchProperties = async (form:any) => {
+  const params = new URLSearchParams();
+
+  if (form.query) {
+    params.append('query', form.query);
+  }
+  if (form.minPrice) {
+    params.append('minPrice', form.minPrice);
+  }
+  if (form.maxPrice) {
+    params.append('maxPrice', form.maxPrice);
+  }
+  if (form.minRating) {
+    params.append('minRating', form.minRating);
+  }
+  if (form.maxRating) {
+    params.append('maxRating', form.maxRating);
+  }
+  if (form.orderby) {
+    params.append('orderby', form.orderby);
+  }
+
+  console.log(params.toString());
+  
+
+  const response = await api.get('/search?' + params.toString());
+  return response.data;
+}

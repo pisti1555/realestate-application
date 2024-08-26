@@ -50,7 +50,7 @@ const Property_Index = () => {
                     {properties.map((property: any) => (
                         <li key={property.id} className="item">
                             <div className="content">
-                                <img src={property.image} />
+                                <img src={property.image} alt="" />
                                 <div className="info">
                                     <strong>{property.title}</strong>
                                     <p>Price: {property.price}$</p>

@@ -10,7 +10,7 @@ const Home = ({ user } : { user:any }) => {
 
 
     return (
-        <>
+        <div className="page-scroll-container">
             <section className="welcome-section">
                 <div className="welcome-grid-container">
                     <div className="welcome-big-container">
@@ -46,7 +46,11 @@ const Home = ({ user } : { user:any }) => {
                     )}
                 </div>
             </section>
-        </>
+
+            <section className="introduce-section">
+                <h1>Introduce section</h1>
+            </section>
+        </div>
     );
 }
 
