@@ -1,5 +1,6 @@
 @import '../property_search/PropertyResults.css';
 @import '../property_search/SearchPropertyForm.css';
+@import '../Buttons.css';
 
 .property-search-container {
   width: 100%;

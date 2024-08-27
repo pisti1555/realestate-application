@@ -6,11 +6,13 @@ import { Search } from "@mui/icons-material";
 import '../../css/property_search/PropertySearchPage.css';
 import { PropertyInterface_Search } from "../../interface/property/propertyInterface";
 import Loading from "../../components/pages/loading/Loading";
+import ErrorPage from "../../components/pages/error/Error";
 
 
 const Property_Search = () => {
-  const [properties, setProperties] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [properties, setProperties] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [errors, setErrors] = useState<string>('');
   const [form, setForm] = useState<PropertyInterface_Search>({
     query: "",
     minPrice: 0,
@@ -20,9 +22,18 @@ const Property_Search = () => {
     orderby: 'date-desc'
   });
 
+  useEffect(() => {
+      searchProperties(form).then((response) => {
+      setProperties(response);
+    }).catch((error) => {
+      setErrors(error.message);
+    }).finally(() => {
+      setLoading(false);
+    });
+  }, [form.query]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
     const response = await searchProperties(form);
     setProperties(response);
   }
@@ -30,6 +41,12 @@ const Property_Search = () => {
   if (loading) {
     return(
       <Loading />
+    );
+  }
+
+  if (errors) {
+    return (
+      <ErrorPage errors={errors} />
     );
   }
   
@@ -81,7 +98,7 @@ const Property_Search = () => {
               type="range"
               className="range-input"
               id="rating-range"
-              min="1"
+              min="0"
               max={form.maxRating}
               step="0.1"
               value={form.minRating}
@@ -98,7 +115,11 @@ const Property_Search = () => {
               onChange={(e) => setForm({...form, maxRating: Number(e.target.value)})}
             />
             <div className="range-values">
-              <span>Min Rating: {form.minRating}</span>
+              {form.minRating < 1 ? (
+                <span>Min rating: not rated</span>
+              ) : (
+                <span>Min Rating: {form.minRating}</span>
+              )}
               <span>Max Rating: {form.maxRating}</span>
             </div>
           </div>
@@ -119,7 +140,7 @@ const Property_Search = () => {
       </form>
 
       <div className="property-results">
-        {properties.empty? (
+        {properties.length === 0 ? (
           <div className="not-found">
             <h1>No properties found</h1>
           </div>
@@ -141,7 +162,7 @@ const Property_Search = () => {
                     </div>
                   </div>
                   <div className="btn-container">
-                      <Link to={'/properties/' + property.id} className="button shadow-br">Show</Link>
+                      <Link to={'/properties/' + property.id} className="submit-button">Show</Link>
                   </div>
                 </li>
               ))}

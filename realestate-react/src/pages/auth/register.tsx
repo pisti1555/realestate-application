@@ -29,7 +29,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (success) navigate('/welcome?registration-success');
+    if (success) navigate('/?registration-success');
   }, [success, navigate]);
 
   const reset = (num:number) => {

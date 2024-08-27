@@ -64,9 +64,6 @@ export const searchProperties = async (form:any) => {
     params.append('orderby', form.orderby);
   }
 
-  console.log(params.toString());
-  
-
   const response = await api.get('/search?' + params.toString());
   return response.data;
 }

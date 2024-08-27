@@ -29,19 +29,35 @@ class SearchService
     if ($request->has("maxRating")) {
       $query->where("rating","<=", $request->maxRating);
     }
-    if ($request->has("orderBy")) {
-      if ($request->orderBy == "date-asc") {
-        $query->orderBy("created_at", "asc");
-      } else if($request->orderBy == "date-desc") {
-        $query->orderBy("created_at", "desc");
-      } else if($request->orderBy == "rating-desc") {
-        $query->orderBy("rating", "desc");
-      } else if($request->orderBy == "price-desc") {
-        $query->orderBy("price", "desc");
-      } else if($request->orderBy == "price-asc") {
-        $query->orderBy("price", "asc");
+    if ($request->has('orderby')) {
+      $orderBy = $request->query('orderby');
+      
+      switch ($orderBy) {
+          case 'date-desc': {
+            $query->orderBy('created_at', 'desc');
+            break;
+          }
+          case 'date-asc': {
+            $query->orderBy('created_at', 'asc');
+            break;
+          }
+          case 'rating-desc': {
+            $query->orderBy('rating', 'desc');
+            break;
+          }
+          case 'price-asc': {
+            $query->orderBy('price', 'asc');
+              break;
+          } 
+          case 'price-desc': {
+            $query->orderBy('price', 'desc');
+            break;
+          } 
+          default: {
+            $query->orderBy('created_at', 'desc');
+          }
       }
-    }
+  }
 
     return $query->get();
   }
