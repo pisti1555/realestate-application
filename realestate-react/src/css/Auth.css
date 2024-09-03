@@ -154,7 +154,8 @@ form h1 {
   border-right: none;
 }
 
-.error-text {
+.error-text,
+.submit-error {
   color: #930000;
   padding-left: 1em;
 }

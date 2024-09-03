@@ -24,11 +24,11 @@ class UpdatePropertyRequest extends FormRequest
         return [
             'image'=> ['sometimes', 'image', 'mimes:jpeg, jpg'],
             'title' => ['sometimes', 'string', 'min:1', 'max:30'],
-            'price' => ['sometimes', 'numeric'],
+            'price' => ['sometimes', 'numeric', 'min:100'],
             'description' => ['sometimes', 'string', 'max:500'],
-            'city' => ['sometimes', 'string'],
-            'postal_code' => ['sometimes', 'string'],
-            'address' => ['sometimes', 'string'],
+            'city' => ['sometimes', 'string', 'max:20'],
+            'postal_code' => ['sometimes', 'string', 'max:10'],
+            'address' => ['sometimes', 'string', 'max:50'],
         ];
     }
 }

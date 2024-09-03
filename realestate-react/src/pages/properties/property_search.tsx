@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { searchProperties } from "../../services/property";
 import { Search } from "@mui/icons-material";
 import '../../css/property_search/PropertySearchPage.css';
-import { PropertyInterface_Search } from "../../interface/property/propertyInterface";
+import { PropertyInterface_Search, PropertyInterface_Get } from "../../interface/property/PropertyInterface";
 import Loading from "../../components/pages/loading/Loading";
 import ErrorPage from "../../components/pages/error/Error";
 
 
 const Property_Search = () => {
-  const [properties, setProperties] = useState<any[]>([]);
+  const [properties, setProperties] = useState<PropertyInterface_Get[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [errors, setErrors] = useState<string>('');
   const [form, setForm] = useState<PropertyInterface_Search>({
@@ -70,7 +70,7 @@ const Property_Search = () => {
             <input
               type="range"
               className="range-input"
-              id="price-range"
+              id="price-range-min"
               min="0"
               max={form.maxPrice}
               step="10"
@@ -80,7 +80,7 @@ const Property_Search = () => {
             <input
               type="range"
               className="range-input"
-              id="price-range"
+              id="price-range-max"
               min={form.minPrice}
               max="999999"
               step="10"
@@ -97,7 +97,7 @@ const Property_Search = () => {
             <input
               type="range"
               className="range-input"
-              id="rating-range"
+              id="rating-range-min"
               min="0"
               max={form.maxRating}
               step="0.1"
@@ -107,7 +107,7 @@ const Property_Search = () => {
             <input
               type="range"
               className="range-input"
-              id="rating-range"
+              id="rating-range-max"
               min={form.minRating}
               max="5"
               step="0.1"
@@ -149,7 +149,7 @@ const Property_Search = () => {
               {properties.map((property: any) => (
                 <li key={property.id} className="item">
                   <div className="content">
-                    <img src={property.image} alt="" />
+                    <img src={property.image} alt={property.title} />
                     <div className="info">
                       <strong>{property.title}</strong>
                       <p>Price: {property.price}$</p>
@@ -162,7 +162,7 @@ const Property_Search = () => {
                     </div>
                   </div>
                   <div className="btn-container">
-                      <Link to={'/properties/' + property.id} className="submit-button">Show</Link>
+                      <Link to={'/properties/' + property.id} className="kkk">Show</Link>
                   </div>
                 </li>
               ))}

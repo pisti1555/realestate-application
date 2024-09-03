@@ -5,7 +5,7 @@ import NavBar from './components/navbar/Navbar';
 
 import Login from './pages/auth/login';
 import Register from './pages/auth/register';
-import Logout from './pages/auth/logout';
+import Logout from './components/pages/logout/Logout';
 
 import Home from './pages/home';
 import Profile from './pages/profile';

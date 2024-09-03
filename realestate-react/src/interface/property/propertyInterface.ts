@@ -1,4 +1,5 @@
 export interface PropertyInterface_Get {
+  id: string,
   image: string,
   title: string,
   price: number,
