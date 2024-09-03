@@ -29,7 +29,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (success) navigate('/welcome?registration-success');
+    if (success) navigate('/?registration-success');
   }, [success, navigate]);
 
   const reset = (num:number) => {
@@ -213,7 +213,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         
           <button type="submit" className="auth-button">Register</button>
 
-        {submitError && <p>{submitError}</p>}
+        {submitError && <p className='submit-error'>{submitError}</p>}
 
         {type === 1 ? (
           <p>If you would like to register as an agent <span className='redirect' onClick={() => {reset(2)}}>click here</span></p>

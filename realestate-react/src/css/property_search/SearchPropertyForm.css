@@ -1,17 +1,17 @@
-@import '/src/css/Buttons.css';
-
+/* Alapvető beállítások a keresési űrlaphoz */
 .search-form {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 20vw;
+  width: 30%;
+  min-height: 100vh;
   align-items: center;
   justify-content: flex-start;
-  padding: 1em;
-  background-color: #0084d6;
+  padding: 2em;
+  background: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .search-form .text-search-container {
@@ -20,38 +20,45 @@
   align-items: center;
   padding: 1em;
   width: 100%;
+  margin-bottom: 1.5em;
 }
+
 .search-form .text-search-container .text-input-container {
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  border-radius: 5em;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #ffffff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 .search-form .text-search-container .text-input-container svg {
-  border: 1px solid black;
-  border-right: none;
   padding: 0.5em;
-  background: #00297a;
-  border-top-left-radius: 5em;
-  border-bottom-left-radius: 5em;
+  background: #002fff;
   color: #ffffff;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
+
 .search-form .text-search-container .text-input-container input {
-  width: 80%;
+  width: 100%;
   outline: none;
-  border: 1px solid black;
-  border-left: none;
-  padding: 0.5em;
+  border: none;
+  padding: 0.5em 1em;
   background: #ffffff;
-  border-top-right-radius: 5em;
-  border-bottom-right-radius: 5em;
   font-size: 1em;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .search-form .range-container {
   width: 100%;
   padding: 1em;
+  margin-bottom: 1em;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .search-form .range-container .price-range-container,
@@ -61,39 +68,34 @@
   padding-bottom: 1em;
 }
 
-.search-form .range-container .price-range-container .range-values,
-.search-form .range-container .rating-range-container .range-values {
+.search-form .range-container .range-values {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: #444444;
 }
 
 .search-form .range-container .range-input {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 1em;
+  height: 0.8em;
   background: #d3d3d3;
-  border-radius: 5px;
+  border-radius: 1em;
   outline: none;
-  opacity: 0.8;
-  transition: opacity 0.2s;
   margin-bottom: 0.5em;
-}
-
-.search-form .range-container .range-input:hover {
-  opacity: 1;
 }
 
 .search-form .range-container .range-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.2em;
+  height: 1.2em;
   border-radius: 50%;
-  background: #00297a;
+  background: #002fff;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 
 .search-form .order-by-container {
@@ -101,26 +103,26 @@
   padding: 1em;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5em;
 }
 
 .search-form .order-by-container label {
   font-weight: bold;
   font-size: 1em;
-  text-wrap: nowrap;
   margin-bottom: 0.5em;
+  color: #444444;
 }
 
 .search-form .order-by-container select {
   width: 100%;
   padding: 0.5em;
   font-size: 1em;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  background: #ffffff;
   appearance: none;
   cursor: pointer;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  position: relative;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 

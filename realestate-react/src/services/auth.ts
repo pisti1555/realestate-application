@@ -34,11 +34,8 @@ export async function login(form:LoginInterface) {
         if (response.data.status === true) {
             localStorage.setItem('token', token);
         }
-
         return response.data;
     } catch (error:any) {
-        console.log(error);
-        
         if (error.response && error.response.data && error.response.data.message) {
             throw new Error(error.response.data.message);
         } else {

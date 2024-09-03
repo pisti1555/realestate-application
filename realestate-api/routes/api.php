@@ -29,4 +29,6 @@ Route::middleware('check-role')->group(function () {
 Route::get('/properties', [PropertyController::class,'index'])->name('properties.index');
 Route::get('/properties/{property}', [PropertyController::class,'show'])->name('properties.show');
 
+Route::get('/search', [PropertyController::class,'searchProperty'])->name('properties.search');
+
 

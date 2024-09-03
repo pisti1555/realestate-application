@@ -1,0 +1,146 @@
+.property-form {
+  margin: auto;
+  min-height: 100vh;
+  padding: 2em;
+  width: 100%;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  box-shadow: 0 5px 10px rgb(0, 0, 0, 0.5);
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.5em;
+  position: relative;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 0.5em;
+}
+
+.group-text {
+  margin: 0;
+  padding: 0;
+  align-self: baseline;
+  margin: 2em 0 0 2em;
+}
+
+.flex-horizontal {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.property-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  width: 30%;
+  padding-inline: 1em;
+}
+.property-group label {
+  font-weight: 600;
+  margin: 0.5em;
+}
+.property-group input {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  outline: none;
+}
+
+#description-input {
+  width: 80%;
+}
+#description {
+  height: 10em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  outline: none;
+}
+
+#submit-button,
+#cancel-button {
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  padding: 1em 2em;
+  font-weight: 600;
+  border-radius: 1em;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  text-decoration: none;
+  font-size: 1em;
+  width: 40%;
+  text-align: center;
+  margin: 1em;
+}
+
+#submit-button:hover {
+  background: #000786;
+  color: #ffffff;
+}
+
+#cancel-button:hover {
+  background: #950000;
+  color: #ffffff;
+}
+
+
+
+/* From Uiverse.io by vinodjangid07 */ 
+.image-input {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-upload-label input {
+  display: none;
+}
+.image-upload-label svg {
+  height: 50px;
+  fill: rgb(82, 82, 82);
+  margin-bottom: 20px;
+}
+.image-upload-label {
+  cursor: pointer;
+  background-color: #ddd;
+  padding: 30px 70px;
+  border-radius: 40px;
+  border: 2px dashed rgb(82, 82, 82);
+  box-shadow: 0px 0px 200px -50px rgba(0, 0, 0, 0.719);
+}
+.image-upload-design {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.browse-button {
+  background-color: rgb(82, 82, 82);
+  padding: 5px 15px;
+  border-radius: 10px;
+  color: white;
+  transition: all 0.3s;
+}
+.browse-button:hover {
+  background-color: rgb(14, 14, 14);
+}
+
+
+
+
+

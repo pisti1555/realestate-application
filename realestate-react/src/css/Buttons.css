@@ -7,7 +7,7 @@
   background: (--main-color);
   color: #ffffff;
   font-weight: 600;
-  border: 2px solid #00297a;
+  border: 2px solid #000000;
   border-radius: 1em;
   padding: 1em;
   width: 100%;
@@ -15,12 +15,12 @@
   color: #000000;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
   transition: border 0.2s, color 0.2s, background 0.2s;
 }
 .submit-button:hover {
   background: #000000;
   color: #ffffff;
-  border: 2px solid #ffffff;
 }
 
 

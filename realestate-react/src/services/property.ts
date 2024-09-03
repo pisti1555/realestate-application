@@ -1,5 +1,5 @@
 import api from "./api";
-import { PropertyInterface_Store } from "../interface/property/propertyInterface";
+import { PropertyInterface_Store } from "../interface/property/PropertyInterface";
 
 export async function createProperty(form:PropertyInterface_Store) {
   try {
@@ -8,10 +8,12 @@ export async function createProperty(form:PropertyInterface_Store) {
         'Content-Type': 'multipart/form-data',
       }
     });
+    console.log('log in service: ', response);
+    
 
     return response.data;
   } catch (error:any) {
-    throw new Error(error);
+    return error.response.data;
   }
 }
 
@@ -36,8 +38,32 @@ export async function editProperty(
     });
     return response.data;
   } catch (error:any) {
-    console.log(error);
-    
-    throw new Error(error.response.data.message);
+    return error.response.data;
   }
+}
+
+export const searchProperties = async (form:any) => {
+  const params = new URLSearchParams();
+
+  if (form.query) {
+    params.append('query', form.query);
+  }
+  if (form.minPrice) {
+    params.append('minPrice', form.minPrice);
+  }
+  if (form.maxPrice) {
+    params.append('maxPrice', form.maxPrice);
+  }
+  if (form.minRating) {
+    params.append('minRating', form.minRating);
+  }
+  if (form.maxRating) {
+    params.append('maxRating', form.maxRating);
+  }
+  if (form.orderby) {
+    params.append('orderby', form.orderby);
+  }
+
+  const response = await api.get('/search?' + params.toString());
+  return response.data;
 }

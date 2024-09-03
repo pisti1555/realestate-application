@@ -24,11 +24,11 @@ class StorePropertyRequest extends FormRequest
         return [
             'image'=> ['required', 'image', 'mimes:jpeg, jpg'],
             'title' => ['required', 'string', 'min:1', 'max:30'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:100'],
             'description' => ['required', 'string', 'max:500'],
-            'city' => ['required', 'string'],
-            'postal_code' => ['required', 'string'],
-            'address' => ['required', 'string'],
+            'city' => ['required', 'string', 'max:20'],
+            'postal_code' => ['required', 'string', 'max:10'],
+            'address' => ['required', 'string', 'max:50'],
         ];
     }
 }

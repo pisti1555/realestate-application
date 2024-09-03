@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { PropertyInterface_Get } from "../../interface/property/PropertyInterface";
 import ErrorPage from "../../components/pages/error/Error";
 import Loading from "../../components/pages/loading/Loading";
 import api from "../../services/api";
+import '../../css/PropertyShow.css';
+import { ArrowBack } from "@mui/icons-material";
 
-const Property_Index = () => {
-    const [property, setProperty] = useState<any>();
+const Property_Show = () => {
+    const [property, setProperty] = useState<PropertyInterface_Get | null>(null);
+    const [permission, setPermission] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<string>('');
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
+        api.get('/is-own-property/' + id).then(response => {
+            if (response.status === 200) {
+                setPermission(true);
+            }
+        }).catch((error) => {
+            setPermission(false);
+        });
+
         api.get('/properties/' + id)
             .then((response) => {
-                setProperty(response.data.data);              
+                setProperty(response.data.data);
             })
             .catch((error) => {
                 if (error.response && error.response.data && error.response.data.message) {
@@ -29,7 +41,7 @@ const Property_Index = () => {
             .finally(() => {
                 setLoading(false);  
             });
-    }, []);
+    }, [id]);
 
     if (loading) {
         return (
@@ -37,28 +49,41 @@ const Property_Index = () => {
         );
     }
 
-    if (errors) {
+    if (!property || errors) {
         return (
             <ErrorPage errors={errors} />
         );
     }
 
     return (
-        <>
-            { 
-                <div>
-                    <a href={'/properties/edit/' + property.id}>Edit</a>
-                    <img src={property.image} />
-                    <h1>{property.title}</h1>
-                    <h3>{property.price}$</h3>
-                    <p>{property.city}</p>
-                    <p>{property.postal_code}</p>
-                    <p>{property.address}</p>
-                    <p>{property.description}</p>
-                </div>
-            }
-        </>
+        <div className="property-show-page">
+            <Link  to='/properties' className="button-container">
+                <ArrowBack />
+                <p>Back</p>
+            </Link>
+            
+            <div className="img-container">
+                <img src={property.image} alt={property.title} />
+            </div>
+
+            {permission ? (
+                <Link to={'/properties/edit/' + property.id} id="edit-button">Edit</Link>    
+            ) : null}
+            
+            <section className="title-section">
+                <h1>{property.title}</h1>
+                <h2>{property.price}$</h2>
+            </section>
+            <section className="location-section">
+                <p>{property.city}</p>
+                <p>{property.postal_code}</p>
+                <p>{property.address}</p>
+            </section>
+            <section className="description-section">
+                <p>{property.description}</p>
+            </section>
+        </div>
     );
 }
 
-export default Property_Index;
+export default Property_Show;

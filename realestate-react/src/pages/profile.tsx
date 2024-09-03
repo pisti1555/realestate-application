@@ -4,6 +4,7 @@ import api from "../services/api";
 import '../css/Profile.css';
 import Loading from "../components/pages/loading/Loading";
 import ErrorPage from "../components/pages/error/Error";
+import { Phone, Email } from "@mui/icons-material";
 
 const Profile = () => {
 
@@ -44,29 +45,48 @@ const Profile = () => {
         );
     }
 
-    if (user.role == 'agent') {
+    if (user.role === 'agent') {
         return (
-            <div className="container">
-                <div className="right">
-                    <Link to='/properties/create' className="link-button">Create a property</Link>
+            <div className="profile-container">
+                <div className="button-container">
+                    <Link to='/user/edit' className="profile-button">Edit profile</Link>
+                    <Link to='/properties/create' className="profile-button">Create a property</Link>
                 </div>
                 <div className="header">
-                    <img src={user.image} />
-                    <h1>{user.name}</h1>
-                    <p>{user.email}</p>
-                    <p>{user.phone}</p>
+                    <div className="image-container">
+                        <img src={user.image} alt="" />
+                    </div>
+                    <div className="info">
+                        <h1>{user.name}</h1>
+                        <div className="info-row">
+                            <div className="svg-container">
+                                <Email />
+                            </div>
+                            <p>{user.email}</p>
+                        </div>
+                        <div className="info-row">
+                            <div className="svg-container">
+                                <Phone />
+                            </div>
+                            <p>{user.phone}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
     }
     
     return (
-        <div className="container">
-                <div className="header">
+        <div className="profile-container">
+            <div className="button-container">
+                    <Link to='/user/edit' className="profile-button">Edit profile</Link>
+            </div>
+            <div className="header">
+                <div className="info">
                     <h1>{user.name}</h1>
-                    <p>{user.email}</p>
                 </div>
             </div>
+        </div>
     );
 }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image')->default('http://localhost:8000/storage/no-image.png');
             $table->string('title');
             $table->double('price');
+            $table->double('rating')->default(0);
             $table->text('description');
             $table->string('city');
             $table->string('postal_code');
