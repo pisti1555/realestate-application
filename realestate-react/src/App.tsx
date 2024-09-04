@@ -6,19 +6,19 @@ import { UserInterface_Get } from './interface/user/UserInterface';
 
 import NavBar from './components/navbar/Navbar';
 
-import Login from './pages/auth/login';
-import Register from './pages/auth/register';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 import Logout from './components/pages/logout/Logout';
 
-import Home from './pages/home';
+import Home from './pages/Home';
 import UserPage from './pages/User';
 import ProfilePage from './pages/Profile';
 
-import Property_Index from './pages/properties/property_index';
-import Property_Show from './pages/properties/property_show';
-import Property_Create from './pages/properties/property_create';
-import Property_Edit from './pages/properties/property_edit';
-import Property_Search from './pages/properties/property_search';
+import Property_Index from './pages/properties/PropertyIndex';
+import Property_Show from './pages/properties/PropertyShow';
+import Property_Create from './pages/properties/PropertyCreate';
+import Property_Edit from './pages/properties/PropertyEdit';
+import Property_Search from './pages/properties/PropertySearch';
 
 
 function App() {
