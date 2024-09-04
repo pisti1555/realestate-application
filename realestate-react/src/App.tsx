@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './services/api';
+
+import { UserInterface_Get } from './interface/user/UserInterface';
+
 import NavBar from './components/navbar/Navbar';
 
 import Login from './pages/auth/login';
@@ -8,7 +11,8 @@ import Register from './pages/auth/register';
 import Logout from './components/pages/logout/Logout';
 
 import Home from './pages/home';
-import Profile from './pages/profile';
+import UserPage from './pages/User';
+import ProfilePage from './pages/Profile';
 
 import Property_Index from './pages/properties/property_index';
 import Property_Show from './pages/properties/property_show';
@@ -18,7 +22,7 @@ import Property_Search from './pages/properties/property_search';
 
 
 function App() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<UserInterface_Get | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -26,7 +30,7 @@ function App() {
       try {
         const response = await api.get('/user');
         if (response.status === 200) {
-          setUser(response.data);
+          setUser(response.data.data);
         } else {
           setUser(null);
         }
@@ -50,7 +54,8 @@ function App() {
         <Route path="/register" element={<Register setUser={setUser} />} />
 
         <Route path="/" element={<Home user={user} />} />
-        <Route path="/user" element={<Profile />} />
+        <Route path="/user" element={<UserPage user={user} />} />
+        <Route path="/profile/:id" element={<ProfilePage />} />
 
         <Route path="/properties" element={<Property_Index />} />
         <Route path="/properties/:id" element={<Property_Show />} />

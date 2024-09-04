@@ -2,7 +2,7 @@
 @import './PropertyForm.css';
 
 .property-container {
-  font-family: Nunito, Arial;
+  font-family: Nunito, Arial, Helvetica, sans-serif;
   margin: auto;
   width: 70%;
   min-height: 100vh;

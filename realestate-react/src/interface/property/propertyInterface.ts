@@ -1,3 +1,5 @@
+import { UserInterface_Get } from "../user/UserInterface"
+
 export interface PropertyInterface_Get {
   id: string,
   image: string,
@@ -6,7 +8,8 @@ export interface PropertyInterface_Get {
   city: string,
   postal_code: string,
   address: string,
-  description: string
+  description: string,
+  user: UserInterface_Get
 }
 
 export interface PropertyInterface_Store {

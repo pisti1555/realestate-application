@@ -5,7 +5,7 @@ import ErrorPage from "../../components/pages/error/Error";
 import Loading from "../../components/pages/loading/Loading";
 import api from "../../services/api";
 import '../../css/PropertyShow.css';
-import { ArrowBack } from "@mui/icons-material";
+import { ArrowBack, Email, Phone } from "@mui/icons-material";
 
 const Property_Show = () => {
     const [property, setProperty] = useState<PropertyInterface_Get | null>(null);
@@ -25,6 +25,8 @@ const Property_Show = () => {
 
         api.get('/properties/' + id)
             .then((response) => {
+                console.log(response);
+                
                 setProperty(response.data.data);
             })
             .catch((error) => {
@@ -81,6 +83,34 @@ const Property_Show = () => {
             </section>
             <section className="description-section">
                 <p>{property.description}</p>
+            </section>
+
+            <section className="advertiser-section">
+                <h1>Contact the advertiser</h1>
+                <div className="content">
+                    <div className="image-container">
+                        <img src={property.user.image} alt={property.user.name} />
+                    </div>
+                    <div className="info">
+                        <h1>{property.user.name}</h1>
+                        <div className="info-row">
+                            <div className="svg-container">
+                                <Email />
+                            </div>
+                            <p>{property.user.email}</p>
+                        </div>
+                        <div className="info-row">
+                            <div className="svg-container">
+                                <Phone />
+                            </div>
+                            <p>{property.user.phone}</p>
+                        </div>
+                    </div>
+                    <div className="contact">
+                        <Link to={'/profile/' + property.user.id}>View profile</Link>
+                        <Link to={'/message/' + property.user.id}>Send a direct message</Link>
+                    </div>
+                </div>
             </section>
         </div>
     );

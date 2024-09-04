@@ -36,6 +36,7 @@ class PropertyController extends Controller
     {
         try {
             $validated = $request->validated();
+            $validated['rating'] = 0;
 
             $imgPath = $request->image->store('properties', 'public');
             $validated['image'] = env('APP_URL') . '/storage/' . $imgPath;

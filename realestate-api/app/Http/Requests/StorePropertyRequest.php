@@ -29,6 +29,7 @@ class StorePropertyRequest extends FormRequest
             'city' => ['required', 'string', 'max:20'],
             'postal_code' => ['required', 'string', 'max:10'],
             'address' => ['required', 'string', 'max:50'],
+            'rating' => ['numeric', 'min:0', 'max:0']
         ];
     }
 }

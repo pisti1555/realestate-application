@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Resources\UserResource;
 
 Route::middleware('unauth')->group(function () {
     Route::post('/register', [AuthController::class,'register'])->name('register');
@@ -15,7 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        return new UserResource($request->user());
     });
 });
 
@@ -25,6 +27,8 @@ Route::middleware('check-role')->group(function () {
     Route::post('/properties/{property}', [PropertyController::class,'update'])->name('properties.update');
     Route::delete('/properties/{property}', [PropertyController::class,'delete'])->name('properties.delete');
 });
+
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('user.show');
 
 Route::get('/properties', [PropertyController::class,'index'])->name('properties.index');
 Route::get('/properties/{property}', [PropertyController::class,'show'])->name('properties.show');

@@ -31,6 +31,7 @@
   margin-bottom: 2em;
   box-sizing: border-box;
   transition: border-radius 0.2s, background-color 0.2s;
+  color: #ececec;
 }
 
 .navbar .option,
@@ -42,7 +43,7 @@
   margin-bottom: 2em;
   width: 100%;
   height: 5em;
-  color: #ffffff;
+  color: #ececec;
   text-decoration: none;
   box-sizing: border-box;
   transition: border-radius 0.2s, background-color 0.2s;
@@ -52,6 +53,10 @@
 }
 .navbar .option svg {
   animation: fadeIn 1s;
+  color: #ececec;
+}
+.navbar-closed .option svg {
+  color: #ececec;
 }
 .navbar .option p {
   display: inline-flex;
@@ -59,7 +64,7 @@
   margin-left: 1em;
   padding: 0;
   animation: slideIn 1s;
-  color: #cdcdcd;
+  color: #ececec;
 }
 .navbar-closed .option p {
   display: none;
