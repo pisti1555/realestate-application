@@ -17,8 +17,9 @@ Route::middleware('unauth')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class,'logout'])->name('logout');
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
-    Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+    Route::get('/messages/sent', [MessageController::class, 'sentMessages'])->name('messages.sent');
     Route::post('/messages/send', [MessageController::class, 'store'])->name('messages.send');
+    Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
 
     Route::get('/user', function (Request $request) {
         return new UserResource($request->user());

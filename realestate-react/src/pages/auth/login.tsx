@@ -65,7 +65,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
           <h1>Login to you account</h1>
           <div className="group-container">
             <div className={!valid?"invalid":"group"}>
-              <label htmlFor="email_input">
+              <label htmlFor="email_input" className='auth-label'>
                 <Mail />
               </label>
               <input 
@@ -74,6 +74,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
                 id="email_input" 
                 value={form.email}
                 placeholder="Email address"
+                className='auth-input'
               />
             </div>
             {errors.email && <p className='error-text'>{errors.email}</p>}
@@ -81,7 +82,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
           
           <div className="group-container">
             <div className={!valid?"invalid":"group"}>
-              <label htmlFor="password_input">
+              <label htmlFor="password_input" className='auth-label'>
                 <Lock />
               </label>
               <input 
@@ -90,6 +91,7 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
                 id="password_input" 
                 value={form.password}
                 placeholder="Password"
+                className='auth-input'
               />
             </div>
             {errors.password && <p className='error-text'>{errors.password}</p>}

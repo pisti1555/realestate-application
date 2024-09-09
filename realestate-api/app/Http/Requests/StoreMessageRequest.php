@@ -24,6 +24,7 @@ class StoreMessageRequest extends FormRequest
         return [
             'sender' => ['numeric', 'exists:users,id'],
             'receiver' => ['required', 'numeric', 'exists:users,id'],
+            'title' => ['required', 'string', 'min:1', 'max:30'],
             'message' => ['required', 'string', 'min:20', 'max:500']
         ];
     }

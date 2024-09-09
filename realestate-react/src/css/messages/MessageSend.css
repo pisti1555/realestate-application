@@ -1,0 +1,80 @@
+.message-send-page {
+  font-family: Nunito, Arial, Helvetica, sans-serif;
+  width: 60%;
+  margin: 0 auto;
+  padding: 2em;
+  padding-left: 5em;
+  background: #f9f9f9;
+  border-radius: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#message-send-form {
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+}
+
+.vertical-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  width: 80%;
+}
+
+label {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: #494949;
+}
+
+input[type="text"],
+#message-input {
+  width: 100%;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  background: #fff;
+  transition: border 0.2s ease;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus,
+#message-input:hover,
+#message-input:focus {
+  border: 1px solid #007BFF;
+  outline: none;
+}
+
+#message-input {
+  min-height: 10em;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80%;
+}
+
+.button-container a,
+.button-container button {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.5em 1em;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  font-size: 1em;
+  margin: 0.5em;
+}
+
+.button-container a:hover,
+.button-container button:hover {
+  background-color: #0056b3;
+}

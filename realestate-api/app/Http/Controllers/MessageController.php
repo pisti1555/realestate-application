@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\MessageResource;
+use App\Services\MessageService;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
-use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -14,8 +13,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::where('receiver', Auth::id())->get();
-        return MessageResource::collection($messages);
+        return MessageService::getReceivedMessages();
     }
 
     /**
@@ -23,13 +21,7 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        $validated = $request->validated();
-        $validated['sender'] = Auth::id();
-        Message::create($validated);
-        return response()->json([
-            'status' => 200,
-            'message' => $validated
-        ], 201);
+        return MessageService::sendMessage($request);
     }
 
     /**
@@ -37,14 +29,11 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        if ($message->receiver == Auth::id() || $message->sender == Auth::id()) {
-            return new MessageResource($message);
-        } else {
-            return response()->json([
-                'status' => 403,
-                'message' => 'Do not have permission to view this message'
-            ]);
-        }
+        return MessageService::getMessage($message);
+    }
+
+    public function sentMessages() {
+        return MessageService::getSentMessages();
     }
 
     /**

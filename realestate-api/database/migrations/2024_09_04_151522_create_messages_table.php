@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('sender')->constrained('users');
             $table->bigInteger('receiver')->constrained('users');
+            $table->text('title');
             $table->text('message');
             $table->timestamps();
         });

@@ -8,9 +8,6 @@ export async function createProperty(form:PropertyInterface_Store) {
         'Content-Type': 'multipart/form-data',
       }
     });
-    console.log('log in service: ', response);
-    
-
     return response.data;
   } catch (error:any) {
     return error.response.data;

@@ -20,6 +20,10 @@ import Property_Create from './pages/properties/PropertyCreate';
 import Property_Edit from './pages/properties/PropertyEdit';
 import Property_Search from './pages/properties/PropertySearch';
 
+import MessageShow from './pages/messages/MessageShow';
+import MessageIndex from './pages/messages/MessageIndex';
+import MessageSend from './pages/messages/MessageSend';
+
 
 function App() {
   const [user, setUser] = useState<UserInterface_Get | null>(null);
@@ -63,6 +67,10 @@ function App() {
         <Route path="/properties/edit/:id" element={<Property_Edit />} />
         <Route path="/search" element={<Property_Search />} />
         <Route path="/search/:params" element={<Property_Search />} />
+
+        <Route path="/messages" element={<MessageIndex />} />
+        <Route path="/messages/:id" element={<MessageShow />} />
+        <Route path="/messages/send/:id" element={<MessageSend />} />
 
       </Routes>
     </Router>

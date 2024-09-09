@@ -3,7 +3,7 @@ import { UserInterface_Get } from "../../interface/user/UserInterface";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import '../navbar/Navbar.css';
-import { Menu, Home, Person, Search, Login, Logout } from "@mui/icons-material";
+import { Menu, Home, Person, Message, Search, Login, Logout } from "@mui/icons-material";
 
 const NavBar = ({ user }: { user:UserInterface_Get | null }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -27,6 +27,10 @@ const NavBar = ({ user }: { user:UserInterface_Get | null }) => {
                 <Link to='/user' className="option" onClick={() => { setIsOpen(false) }}>
                   <Person />
                   <p>View profile</p>
+                </Link>
+                <Link to='/messages' className="option" onClick={() => { setIsOpen(false) }}>
+                  <Message />
+                  <p>Messages</p>
                 </Link>
                 <Link to='/logout' className="option" onClick={() => { setIsOpen(false) }}>
                   <Logout />
