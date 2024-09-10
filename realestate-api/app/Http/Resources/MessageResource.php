@@ -21,7 +21,8 @@ class MessageResource extends JsonResource
             "receiver" => new UserResource(User::findOrFail($this->receiver)),
             "title" => $this->title,
             "message" => $this->message,
-            "time" => $this->created_at
+            "time" => $this->created_at,
+            "seen" => $this->seen
         ];
     }
 }

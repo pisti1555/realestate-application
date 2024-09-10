@@ -28,7 +28,7 @@ import Loading from './components/pages/loading/Loading';
 
 
 function App() {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<UserInterface_Get | null>(null);
 
   useEffect(() => {

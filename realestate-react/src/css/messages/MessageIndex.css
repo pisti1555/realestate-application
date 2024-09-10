@@ -112,7 +112,8 @@
   text-overflow: ellipsis;
 }
 
-.time {
+#time-container,
+#time-container-seen {
   width: 20%;
   text-align: right;
   color: #616161;
@@ -123,15 +124,36 @@
   margin: 0;
   font-size: 1.2em;
 }
+#sender-seen,
+#receiver-seen {
+  margin: 0;
+  font-size: 1em;
+  color: #616161;
+  font-weight: 400;
+}
 
 #title {
   margin: 0;
   font-size: 1.5em;
 }
+#title-seen {
+  margin: 0;
+  font-size: 1.2em;
+  color: #616161;
+  font-weight: 400;
+}
 
-#date, #time {
+#time-container #date, 
+#time-container #time {
   margin: 0;
   font-size: 0.8em;
+  font-weight: 800;
+}
+#time-container-seen #date-seen, 
+#time-container-seen #time-seen {
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 400;
 }
 
 .no-messages {

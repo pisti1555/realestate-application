@@ -7,6 +7,7 @@ export interface Message_Get {
   title: string,
   message: string,
   time: string
+  seen: boolean
 } 
 
 export interface Message_Post {

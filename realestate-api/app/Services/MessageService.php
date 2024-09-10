@@ -49,7 +49,13 @@ class MessageService
   }
 
   public static function getMessage(Message $message) {
-    if ($message->receiver == Auth::id() || $message->sender == Auth::id()) {
+    if ($message->receiver == Auth::id()) {
+      if ($message->seen == false) {
+        $message->seen = true;
+        $message->save();
+      }
+      return new MessageResource($message);
+    } else if ($message->sender == Auth::id()) {
       return new MessageResource($message);
     } else {
       return response()->json([

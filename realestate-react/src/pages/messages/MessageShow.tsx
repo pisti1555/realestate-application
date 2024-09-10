@@ -1,5 +1,5 @@
 import React, { useState, useEffect }from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { Message_Get } from "../../interface/MessagesInterface";
 
@@ -14,7 +14,6 @@ import { Reply } from "@mui/icons-material";
 import { UserInterface_Get } from "../../interface/user/UserInterface";
 
 const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
-  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [message, setMessage] = useState<Message_Get | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -47,7 +46,6 @@ const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
   }
 
   if (!user) {
-    navigate('/login');
     return (
       <ErrorPage errors={'You are not logged in'} />
     );

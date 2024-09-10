@@ -13,7 +13,8 @@ class Message extends Model
         'sender',
         'receiver',
         'title',
-        'message'
+        'message',
+        'seen'
     ];
 
     public function sender() {

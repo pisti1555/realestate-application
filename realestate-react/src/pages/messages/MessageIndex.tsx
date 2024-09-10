@@ -1,5 +1,5 @@
 import React, { useState, useEffect }from "react";
-  import { Link, useSearchParams, useNavigate } from "react-router-dom";
+  import { Link, useSearchParams } from "react-router-dom";
   
   import { Message_Get } from "../../interface/MessagesInterface";
   
@@ -14,7 +14,6 @@ import React, { useState, useEffect }from "react";
   import { Mail, Send, Close } from "@mui/icons-material";
   
   const MessageIndex = ({ user } : { user:UserInterface_Get | null }) => {
-    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [isSuccessBoxVisible, setIsSuccessBoxVisible] = useState<boolean>(searchParams.has('send-success'));
     const [receivedMessages, setReceivedMessages] = useState<Message_Get[]>([]);
@@ -67,7 +66,6 @@ import React, { useState, useEffect }from "react";
     }
 
     if (!user) {
-      navigate('/login');
       return (
         <ErrorPage errors={'You are not logged in'} />
       );
@@ -97,15 +95,31 @@ import React, { useState, useEffect }from "react";
             receivedMessages.map((message) => (
               <Link to={'/messages/' + message.id} key={message.id} className="message-row">
                 <div className="sender">
-                  <h3 id="sender">{message.sender.name}</h3>
+                  {message.seen? (
+                    <h3 id="sender-seen">{message.sender.name}</h3>
+                  ) : (
+                    <h3 id="sender">{message.sender.name}</h3>
+                  )}
                 </div>
                 <div className="title">
-                  <h1 id="title">{message.title}</h1>
+                  {message.seen? (
+                    <h3 id="title-seen">{message.title}</h3>
+                  ) : (
+                    <h3 id="title">{message.title}</h3>
+                  )}
                 </div>
-                <div className="time">
-                  <h3 id="date">{new Date(message.time).toDateString()}</h3>
-                  <h3 id="time">{new Date(message.time).toTimeString()}</h3>
-                </div>
+                {message.seen? (
+                  <div id="time-container-seen">
+                    <h3 id="date-seen">{new Date(message.time).toDateString()}</h3>
+                    <h3 id="time-seen">{new Date(message.time).toTimeString()}</h3>
+                  </div>
+                ) : (
+                  <div id="time-container">
+                    <h3 id="date">{new Date(message.time).toDateString()}</h3>
+                    <h3 id="time">{new Date(message.time).toTimeString()}</h3>
+                  </div>
+                )}
+
               </Link>
             ))
           ) : (
@@ -120,15 +134,14 @@ import React, { useState, useEffect }from "react";
               sentMessages.map((message) => (
                 <Link to={'/messages/' + message.id} key={message.id} className="message-row">
                   <div className="sender">
-                    <p>sent to</p>
-                    <h3 id="receiver">{message.receiver.name}</h3>
+                    <h3 id="receiver-seen">{message.receiver.name}</h3>
                   </div>
                   <div className="title">
-                    <h1 id="title">{message.title}</h1>
+                    <h1 id="title-seen">{message.title}</h1>
                   </div>
-                  <div className="time">
-                    <h3 id="date">{new Date(message.time).toDateString()}</h3>
-                    <h3 id="time">{new Date(message.time).toTimeString()}</h3>
+                  <div id="time-container-seen">
+                    <h3 id="date-seen">{new Date(message.time).toDateString()}</h3>
+                    <h3 id="time-seen">{new Date(message.time).toTimeString()}</h3>
                   </div>
                 </Link>
               )

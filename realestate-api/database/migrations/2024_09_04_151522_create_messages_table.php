@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('receiver')->constrained('users');
             $table->text('title');
             $table->text('message');
+            $table->boolean('seen')->default(false);
             $table->timestamps();
         });
     }

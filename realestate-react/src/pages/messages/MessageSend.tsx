@@ -50,7 +50,6 @@ const MessageSend = ({ user } : { user:UserInterface_Get | null }) => {
   }
 
   if (!user) {
-    navigate('/login');
     return (
       <ErrorPage errors={'You are not logged in'} />
     );
