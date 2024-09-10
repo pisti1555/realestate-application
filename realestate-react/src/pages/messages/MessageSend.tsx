@@ -3,9 +3,11 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { sendMessage } from "../../services/message";
 import { Message_Post } from "../../interface/MessagesInterface";
 import { validateMessageSendForm } from "../../services/validateMessage";
+import { UserInterface_Get } from "../../interface/user/UserInterface";
+import ErrorPage from "../../components/pages/error/Error";
 import '../../css/messages/MessageSend.css';
 
-const MessageSend = () => {
+const MessageSend = ({ user } : { user:UserInterface_Get | null }) => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [valid, setValid] = useState<boolean>(true);
@@ -13,20 +15,19 @@ const MessageSend = () => {
   const [errors, setErrors] = useState<any>({
     receiver: '',
     title: '',
-    message: ''
+    message: '',
   });
 
   const [form, setForm] = useState<Message_Post>({
-    receiver: Number(id),
+    receiver: Number(id) || 0,
     title: '',
-    message: ''
+    message: '',
   });
 
   const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validated = validateMessageSendForm(form);
     setErrors(validated);
-
     if (validated.receiver || validated.title || validated.message) {
       setValid(false);
       return;
@@ -36,6 +37,7 @@ const MessageSend = () => {
       (response) => {
         if (response.status === 200) { 
           setValid(true);
+          navigate('/messages?send-success');
         } else {
           setValid(false);
           setSubmitError(response.message);
@@ -44,9 +46,14 @@ const MessageSend = () => {
     ).catch((error) => {
       setValid(false);
       setSubmitError(error.message);
-    }).finally(() => {
-      navigate('/messages?send-success');
     });
+  }
+
+  if (!user) {
+    navigate('/login');
+    return (
+      <ErrorPage errors={'You are not logged in'} />
+    );
   }
 
   return (
@@ -55,19 +62,19 @@ const MessageSend = () => {
       {errors.receiver && <p className="error-text">errors.receiver</p>}
       <form action="#" onSubmit={handleSubmit} id="message-send-form">
         <div className="vertical-group">
-          {errors.title && <p className="error-text">errors.title</p>}
           <label htmlFor="title-input">Title:</label>
-          <input type="text" id='title-input' name="title" onChange={(e) => setForm({...form, title:e.target.value})} />
+          <input type="text" id='title-input' name="title" value={form.title} onChange={(e) => setForm({...form, title:e.target.value})} />
+          {errors.title && <p className="error-text">{errors.title}</p>}
         </div>
         <div className="vertical-group">
-          {errors.message && <p className="error-text">errors.message</p>}
           <label htmlFor="message-input">Message content:</label>
-          <textarea id='message-input' name="message" onChange={(e) => setForm({...form, message:e.target.value})}/>
+          <textarea id='message-input' name="message" value={form.message} onChange={(e) => setForm({...form, message:e.target.value})}/>
+          {errors.message && <p className="error-text">{errors.message}</p>}
         </div>
+        {submitError && <p className='error-text'>{submitError}</p>}
         <div className="button-container">
           <Link to='/messages'>Cancel</Link>
           <button type="submit">Send</button>
-          {submitError && <p className='error-text'>{submitError}</p>}
         </div>
       </form>
     </div>

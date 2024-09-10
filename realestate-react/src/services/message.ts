@@ -6,8 +6,6 @@ export const sendMessage = async (form:Message_Post) => {
     const response = await api.post('/messages/send', form);
     return response.data;
   } catch (error:any) {
-    console.log(error);
-    
     return error.response.data;
   }
 }

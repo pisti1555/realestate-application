@@ -1,5 +1,5 @@
 import React, { useState, useEffect }from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { Message_Get } from "../../interface/MessagesInterface";
 
@@ -11,8 +11,10 @@ import api from "../../services/api";
 import '../../css/messages/MessageShow.css';
 
 import { Reply } from "@mui/icons-material";
+import { UserInterface_Get } from "../../interface/user/UserInterface";
 
-const MessageShow = () => {
+const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [message, setMessage] = useState<Message_Get | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -44,6 +46,13 @@ const MessageShow = () => {
     );
   }
 
+  if (!user) {
+    navigate('/login');
+    return (
+      <ErrorPage errors={'You are not logged in'} />
+    );
+  }
+
   if (!message) {
     return (
       <ErrorPage errors={"Something went wrong"} />
@@ -53,12 +62,14 @@ const MessageShow = () => {
   return (
     <div id="message-show-container">
       <div className="message">
-        <div className="button-container">
-          <Link to={'/messages/send/' + message.sender.id}>
-            <Reply />
-            <p>Reply</p>
-          </Link>
-        </div>
+        {message.sender.id !== (user.id) && (
+          <div className="button-container">
+            <Link to={'/messages/send/' + message.sender.id}>
+              <Reply />
+              <p>Reply</p>
+            </Link>
+          </div>
+        )}
         <div className="header">
           <div className="image-container">
             <img src={message.sender.image} alt={message.sender.name} />

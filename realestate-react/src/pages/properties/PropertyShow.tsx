@@ -108,7 +108,7 @@ const Property_Show = () => {
                     </div>
                     <div className="contact">
                         <Link to={'/profile/' + property.user.id}>View profile</Link>
-                        <Link to={'/message/' + property.user.id}>Send a direct message</Link>
+                        <Link to={'/messages/send/' + property.user.id}>Send a direct message</Link>
                     </div>
                 </div>
             </section>

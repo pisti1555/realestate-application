@@ -54,7 +54,7 @@ const ProfilePage = () => {
     return (
       <div className="profile-container">
         <div className="button-container">
-          <Link to={'/message/' + id} className="profile-button">Send a message</Link>
+          <Link to={'/messages/send/' + id} className="profile-button">Send a message</Link>
         </div>
         <div className="header">
           <div className="image-container">

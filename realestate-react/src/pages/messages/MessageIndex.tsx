@@ -1,5 +1,5 @@
 import React, { useState, useEffect }from "react";
-  import { Link, useSearchParams } from "react-router-dom";
+  import { Link, useSearchParams, useNavigate } from "react-router-dom";
   
   import { Message_Get } from "../../interface/MessagesInterface";
   
@@ -7,13 +7,16 @@ import React, { useState, useEffect }from "react";
   import Loading from "../../components/pages/loading/Loading";
   
   import api from "../../services/api";
+  import { UserInterface_Get } from "../../interface/user/UserInterface";
   
   import '../../css/messages/MessageIndex.css';
 
-  import { Mail, Send } from "@mui/icons-material";
+  import { Mail, Send, Close } from "@mui/icons-material";
   
-  const MessageIndex = () => {
+  const MessageIndex = ({ user } : { user:UserInterface_Get | null }) => {
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const [isSuccessBoxVisible, setIsSuccessBoxVisible] = useState<boolean>(searchParams.has('send-success'));
     const [receivedMessages, setReceivedMessages] = useState<Message_Get[]>([]);
     const [sentMessages, setSentMessages] = useState<Message_Get[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -62,6 +65,13 @@ import React, { useState, useEffect }from "react";
         <Loading />
       );
     }
+
+    if (!user) {
+      navigate('/login');
+      return (
+        <ErrorPage errors={'You are not logged in'} />
+      );
+    }
   
     return (
       <div id="message-index-container">
@@ -76,9 +86,10 @@ import React, { useState, useEffect }from "react";
           </button>
         </div>
         
-        {searchParams.has('send-success') && 
-        <div id="send-success-box">
-          <h3 className="success-msg">Message has been sent successfully</h3>
+        {isSuccessBoxVisible && 
+        <div id="msg-send-success-box">
+          <h3 id="msg-send-success-box-success-msg">Message has been sent successfully</h3>
+          <button id="msg-send-success-box-close-btn" onClick={() => {setIsSuccessBoxVisible(false)}}><Close /></button>
         </div>}
         {received_sent_switch ? (
           <div className="messages-list">

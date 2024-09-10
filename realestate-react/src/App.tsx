@@ -24,27 +24,39 @@ import MessageShow from './pages/messages/MessageShow';
 import MessageIndex from './pages/messages/MessageIndex';
 import MessageSend from './pages/messages/MessageSend';
 
+import Loading from './components/pages/loading/Loading';
+
 
 function App() {
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<UserInterface_Get | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
       if (!localStorage.getItem('token')) return;
-      try {
-        const response = await api.get('/user');
+      
+      api.get('/user').then((response) => {
+        setLoading(true);
         if (response.status === 200) {
           setUser(response.data.data);
         } else {
           setUser(null);
         }
-      } catch (error: any) {
+      }).catch((error:any) => {
         setUser(null);
-      }
+      }).finally(() => {
+        setLoading(false);
+      });
     };
 
     getUser();
   }, []);
+
+  if (loading) {
+    return(
+      <Loading />
+    );
+  }
 
 
   return (
@@ -68,9 +80,9 @@ function App() {
         <Route path="/search" element={<Property_Search />} />
         <Route path="/search/:params" element={<Property_Search />} />
 
-        <Route path="/messages" element={<MessageIndex />} />
-        <Route path="/messages/:id" element={<MessageShow />} />
-        <Route path="/messages/send/:id" element={<MessageSend />} />
+        <Route path="/messages" element={<MessageIndex user={user} />} />
+        <Route path="/messages/:id" element={<MessageShow user={user} />} />
+        <Route path="/messages/send/:id" element={<MessageSend user={user} />} />
 
       </Routes>
     </Router>

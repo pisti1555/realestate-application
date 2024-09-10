@@ -17,7 +17,7 @@ export const validateMessageSendForm = (form:Message_Post) => {
 
   receiverValid? errors.receiver = '' : errors.receiver = 'Incorrect receiver input';
   titleValid? errors.title = '' : errors.title = 'Title must be at least 1 and maximum 30 characters long';
-  messageValid? errors.message = '' : errors.message = 'Message must be at least 1 and maximum 500 characters long';
+  messageValid? errors.message = '' : errors.message = 'Message must be at least 20 and maximum 500 characters long';
 
   return errors;
 }
@@ -32,5 +32,5 @@ const validateTitle = (title:string) => {
 }
 
 const validateMessage = (message:string) => {
-  return (message.length > 0 && message.length <= 500);
+  return (message.length > 20 && message.length <= 500);
 }

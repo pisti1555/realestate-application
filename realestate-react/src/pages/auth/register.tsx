@@ -102,7 +102,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         </p>
       </div>
 
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForm} className='auth-form'>
         {type === 1? (
           <h1>Register a new user account</h1>
         ) : (
@@ -110,24 +110,25 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         )}
 
         {type === 2 && (
-          <div className="group-container">
-            <div  className={errors.image?"invalid":"group"}>
-              <label htmlFor="image_input">
+          <div className="auth-group-container">
+            <div className={errors.image?"auth-invalid":"auth-group"}>
+              <label htmlFor="image_input" className='auth-label'>
                 <Image />
               </label>
               <input 
                 type="file" 
                 id="image_input" 
-                onChange={handleImage} 
+                onChange={handleImage}
+                className='auth-input'
               />
             </div>
             {errors.image && <p className='error-text'>{errors.image}</p>}
           </div>
         )}
 
-        <div className="group-container">
-          <div className={errors.name?"invalid":"group"}>
-            <label htmlFor="name_input">
+        <div className="auth-group-container">
+          <div className={errors.name?"auth-invalid":"auth-group"}>
+            <label htmlFor="name_input" className='auth-label'>
               <Person />
             </label>
             <input
@@ -136,15 +137,16 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
               placeholder="Enter your name"
               value={form.name}
               onChange={(e) => setForm({...form, name: e.target.value})}
+              className='auth-input'
               required
             />
           </div>
           {errors.name && <p className='error-text'>{errors.name}</p>}
         </div>
 
-        <div className="group-container">
-          <div className={errors.email?"invalid":"group"}>
-            <label htmlFor="email_input">
+        <div className="auth-group-container">
+          <div className={errors.email?"auth-invalid":"auth-group"}>
+            <label htmlFor="email_input" className='auth-label'>
               <Mail />
             </label>
             <input
@@ -153,6 +155,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
               placeholder="Email address"
               value={form.email}
               onChange={(e) => setForm({...form, email: e.target.value})}
+              className='auth-input'
               required
             />
           </div>
@@ -160,9 +163,9 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
         </div>
         
         {type === 2 && (
-          <div className="group-container">
-            <div className={errors.phone?"invalid":"group"}>
-              <label htmlFor="phone_input">
+          <div className="auth-group-container">
+            <div className={errors.phone?"auth-invalid":"auth-group"}>
+              <label htmlFor="phone_input" className='auth-label'>
                 <Call />
               </label>
               <input
@@ -171,6 +174,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
                 placeholder="Phone number"
                 value={form.phone}
                 onChange={(e) => setForm({...form, phone: e.target.value})}
+                className='auth-input'
                 required
               />
             </div>
@@ -178,9 +182,9 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
           </div>
         )}
 
-        <div className="group-container">
-          <div className={errors.password?"invalid":"group"}>
-            <label htmlFor="password_input">
+        <div className="auth-group-container">
+          <div className={errors.password?"auth-invalid":"auth-group"}>
+            <label htmlFor="password_input" className='auth-label'>
               <Lock />
             </label>
             <input
@@ -189,15 +193,16 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
               placeholder="Password"
               value={form.password}
               onChange={(e) => setForm({...form, password: e.target.value})}
+              className='auth-input'
               required
             />
           </div>
           {errors.password && <p className='error-text'>{errors.password}</p>}
         </div>
 
-        <div className="group-container">
-            <div className={errors.password_confirm?"invalid":"group"}>
-              <label htmlFor="password_confirm_input">
+        <div className="auth-group-container">
+            <div className={errors.password_confirm?"auth-invalid":"auth-group"}>
+              <label htmlFor="password_confirm_input" className='auth-label'>
                 <Lock />
               </label>
               <input 
@@ -206,6 +211,7 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
                 id="password_confirm_input" 
                 value={form.password_confirm}
                 placeholder="Confirm password"
+                className='auth-input'
               />
             </div>
             {errors.password_confirm && <p className='error-text'>{errors.password_confirm}</p>}

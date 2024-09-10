@@ -42,6 +42,39 @@
   fill: #efefef;
 }
 
+#message-index-container #msg-send-success-box {
+  display: flex;
+  background: #008216;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+#message-index-container #msg-send-success-box #msg-send-success-box-success-msg {
+  margin-right: auto;
+  margin-left: 6em;
+  color: #ffffff;
+}
+#message-index-container #msg-send-success-box #msg-send-success-box-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+  border: 1px solid #008216;
+  border-radius: 5em;
+  padding: 0.5em;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#message-index-container #msg-send-success-box #msg-send-success-box-close-btn:hover,
+#message-index-container #msg-send-success-box #msg-send-success-box-close-btn:active {
+  background: #005e10;
+
+}
+#message-index-container #msg-send-success-box #msg-send-success-box-close-btn svg {
+  fill: #ffffff;
+}
+
 .messages-list {
   margin-top: 1em;
   width: 90%;

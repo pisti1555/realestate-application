@@ -61,10 +61,10 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='auth-form'>
           <h1>Login to you account</h1>
-          <div className="group-container">
-            <div className={!valid?"invalid":"group"}>
+          <div className="auth-group-container">
+            <div className={!valid?"auth-invalid":"auth-group"}>
               <label htmlFor="email_input" className='auth-label'>
                 <Mail />
               </label>
@@ -80,8 +80,8 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
             {errors.email && <p className='error-text'>{errors.email}</p>}
           </div>
           
-          <div className="group-container">
-            <div className={!valid?"invalid":"group"}>
+          <div className="auth-group-container">
+            <div className={!valid?"auth-invalid":"auth-group"}>
               <label htmlFor="password_input" className='auth-label'>
                 <Lock />
               </label>
