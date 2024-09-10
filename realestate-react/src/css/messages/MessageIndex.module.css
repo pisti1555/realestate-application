@@ -1,4 +1,4 @@
-#message-index-container {
+.message_index_container {
   display: flex;
   flex-direction: column;
   padding-top: 0;
@@ -9,7 +9,7 @@
   min-height: 100vh;
 }
 
-#message-index-container #message-nav {
+.message_nav {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,7 +18,7 @@
   height: fit-content;
   background: #001121;
 }
-#message-index-container #message-nav button {
+.message_nav button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -34,27 +34,27 @@
   outline: none;
   border: 1px solid #001121;
 }
-#message-index-container #message-nav button:hover,
-#message-index-container #message-nav button:active {
+.message_nav button:hover,
+.message_nav button:active {
   background: #001e36;
 }
-#message-index-container #message-nav button svg {
+.message_nav button svg {
   fill: #efefef;
 }
 
-#message-index-container #msg-send-success-box {
+.msg_send_success_box {
   display: flex;
   background: #008216;
   width: 100%;
   align-items: center;
   justify-content: center;
 }
-#message-index-container #msg-send-success-box #msg-send-success-box-success-msg {
+.msg_send_success_box_success_msg {
   margin-right: auto;
   margin-left: 6em;
   color: #ffffff;
 }
-#message-index-container #msg-send-success-box #msg-send-success-box-close-btn {
+.msg_send_success_box_close_btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,16 +66,16 @@
   cursor: pointer;
   transition: background 0.2s ease;
 }
-#message-index-container #msg-send-success-box #msg-send-success-box-close-btn:hover,
-#message-index-container #msg-send-success-box #msg-send-success-box-close-btn:active {
+.msg_send_success_box_close_btn:hover,
+.msg_send_success_box_close_btn:active {
   background: #005e10;
 
 }
-#message-index-container #msg-send-success-box #msg-send-success-box-close-btn svg {
+.msg_send_success_box_close_btn svg {
   fill: #ffffff;
 }
 
-.messages-list {
+.messages_list {
   margin-top: 1em;
   width: 90%;
   margin-left: 5em;
@@ -84,7 +84,7 @@
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.message-row {
+.message_row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,7 +95,7 @@
   color: #000000;
 }
 
-.message-row:hover {
+.message_row:hover {
   background: #f0f0f0;
 }
 
@@ -105,63 +105,63 @@
   font-weight: bold;
 }
 
-.title {
+.title_container {
   width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-#time-container,
-#time-container-seen {
+.time-container,
+.time-container_seen {
   width: 20%;
   text-align: right;
   color: #616161;
 }
 
-#sender,
-#receiver {
+.sender,
+.receiver {
   margin: 0;
   font-size: 1.2em;
 }
-#sender-seen,
-#receiver-seen {
+.sender_seen,
+.receiver_seen {
   margin: 0;
   font-size: 1em;
   color: #616161;
   font-weight: 400;
 }
 
-#title {
+.title {
   margin: 0;
   font-size: 1.5em;
 }
-#title-seen {
+.title_seen {
   margin: 0;
   font-size: 1.2em;
   color: #616161;
   font-weight: 400;
 }
 
-#time-container #date, 
-#time-container #time {
+.time_container .date, 
+.time_container .time {
   margin: 0;
   font-size: 0.8em;
   font-weight: 800;
 }
-#time-container-seen #date-seen, 
-#time-container-seen #time-seen {
+.time_container_seen .date_seen, 
+.time_container_seen .time_seen {
   margin: 0;
   font-size: 0.8em;
   font-weight: 400;
 }
 
-.no-messages {
+.no_messages {
   text-align: center;
   padding: 2em;
 }
 
-.no-messages h1 {
+.no_messages h1 {
   font-size: 1.5em;
   color: #4a4a4a;
 }

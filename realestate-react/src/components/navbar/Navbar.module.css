@@ -1,5 +1,5 @@
 .navbar,
-.navbar-closed {
+.navbar_closed {
   position: fixed;
   z-index: 100;
   left: 0;
@@ -17,12 +17,12 @@
 .navbar {
   width: 20em;
 }
-.navbar-closed {
+.navbar_closed {
   width: 5em;
 }
 
-.navbar .menu-button,
-.navbar-closed .menu-button {
+.navbar .menu_button,
+.navbar_closed .menu_button {
   border: none;
   background: transparent;
   padding: 2em;
@@ -35,7 +35,7 @@
 }
 
 .navbar .option,
-.navbar-closed .option {
+.navbar_closed .option {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,15 +48,48 @@
   box-sizing: border-box;
   transition: border-radius 0.2s, background-color 0.2s;
 }
-.navbar-closed .option {
+.navbar_closed .option {
   border-radius: 50%;
 }
 .navbar .option svg {
   animation: fadeIn 1s;
   color: #ececec;
 }
-.navbar-closed .option svg {
+.navbar_closed .option svg {
   color: #ececec;
+}
+.navbar .option .msg_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(-180%, 60%);
+  border: none;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  font-size: 0.9em;
+  background: #ececec;
+  color: #000000;
+  padding: 0.1em;
+  text-decoration: none;
+  animation: fadeIn 1.5s;
+}
+.navbar_closed .option .msg_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(60%, 60%);
+  border: none;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  font-size: 0.9em;
+  background: #ececec;
+  color: #000000;
+  padding: 0.1em;
+  text-decoration: none;
 }
 .navbar .option p {
   display: inline-flex;
@@ -66,12 +99,12 @@
   animation: slideIn 1s;
   color: #ececec;
 }
-.navbar-closed .option p {
+.navbar_closed .option p {
   display: none;
   animation: slideOut 1s;
 }
 
-.menu-button:hover,
+.menu_button:hover,
 .option:hover {
   background-color: #002345a0;
   border-radius: 2em;
@@ -129,7 +162,7 @@
 
 @media (max-width: 1200px) {
   .navbar,
-  .navbar-closed {
+  .navbar_closed {
     position: relative;
     top: 0;
     left: 0;
@@ -150,13 +183,13 @@
     flex-direction: column;
   }
 
-  .navbar-closed {
+  .navbar_closed {
     height: fit-content;
     flex-direction: row;
   }
 
   .navbar .menu-button,
-  .navbar-closed .menu-button {
+  .navbar_closed .menu_button {
     padding: 0.5em;
     margin: 0;
     width: auto;
@@ -164,7 +197,7 @@
   }
 
   .navbar .option,
-  .navbar-closed .option {
+  .navbar_closed .option {
     padding: 0.5em;
     margin: 0;
     height: auto;
@@ -174,24 +207,24 @@
     width: auto;
   }
 
-  .navbar-closed .option {
+  .navbar_closed .option {
     border-radius: 0;
   }
 
 
-  .navbar-closed .option p {
+  .navbar_closed .option p {
     display: none;
   }
   
   .navbar .option svg,
-  .navbar-closed .option svg {
+  .navbar_closed .option svg {
     margin: 0;
     padding: 0;
     width: 0.8em;
     height: 0.8em;
   }
 
-  .menu-button:hover,
+  .menu_button:hover,
   .option:hover {
     background-color: transparent;
     border-radius: 0;

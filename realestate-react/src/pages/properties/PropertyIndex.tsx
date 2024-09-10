@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 import { PropertyInterface_Get } from "../../interface/property/PropertyInterface";
-import '../../css/PropertyIndex.css';
+import css from '../../css/property/PropertyIndex.module.css';
 import Loading from "../../components/pages/loading/Loading";
 import ErrorPage from "../../components/pages/error/Error";
 
-const Property_Index = () => {
+const PropertyIndex = () => {
     const [properties, setProperties] = useState<PropertyInterface_Get[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<string>('');
@@ -45,23 +45,23 @@ const Property_Index = () => {
     }
 
     return (
-        <div className="property-index">
+        <div className={css.property_index}>
             {properties.length > 0 ? (
                 properties.map((property) => (
-                    <div key={property.id} className="item">
+                    <div key={property.id} className={css.item}>
                         <img src={property.image} alt={property.title} />
-                        <div className="info">
+                        <div className={css.info}>
                             <strong>{property.title}</strong>
                             <p>Price: {property.price}$</p>
                             <p>Location: {property.city}, {property.postal_code}</p>
                         </div>
-                        <div className="button-container">
+                        <div className={css.button_container}>
                             <Link to={'/properties/' + property.id}>See more</Link>
                         </div>
                     </div>
                 ))
             ) : (
-                <div className="not-found">
+                <div className={css.not_found}>
                     <h1>No properties found</h1>
                 </div>
             )}
@@ -69,4 +69,4 @@ const Property_Index = () => {
     );
 }
 
-export default Property_Index;
+export default PropertyIndex;

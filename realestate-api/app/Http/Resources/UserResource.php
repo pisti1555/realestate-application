@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Services\MessageService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +22,8 @@ class UserResource extends JsonResource
             "email" => $this->email,
             "phone" => $this->phone,
             "joined" => $this->created_at,
-            "role" => $this->role == "agent" ? 1 : 2
+            "role" => $this->role == "agent" ? 1 : 2,
+            "new_msg_count" => MessageService::getNewMessagesCount($this->id)
         ];
     }
 }

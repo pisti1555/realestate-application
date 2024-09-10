@@ -5,24 +5,23 @@ namespace App\Services;
 use App\Models\Message;
 use App\Http\Resources\MessageResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMessageRequest;
 
 class MessageService
 {
-  public static function getReceivedMessages() {
-    $receivedMessages = Message::where('receiver', Auth::id())->latest()->get();
+  public static function getReceivedMessages(string $id, ) {
+    $receivedMessages = Message::where('receiver', $id)->latest()->get();
     return MessageResource::collection($receivedMessages);
   }
 
-  public static function getSentMessages() {
-    $sentMessages = Message::where('sender', Auth::id())->latest()->get();
+  public static function getSentMessages(string $id, ) {
+    $sentMessages = Message::where('sender', $id)->latest()->get();
     return MessageResource::collection($sentMessages);
   }
 
-  public static function sendMessage(StoreMessageRequest $request) {
+  public static function sendMessage(string $id, StoreMessageRequest $request) {
     $validated = $request->validated();
-      $validated['sender'] = Auth::id();
+      $validated['sender'] = $id;
 
       $senderRole = User::findOrFail($validated['sender'])->role;
       $receiverRole = User::findOrFail($validated['receiver'])->role;
@@ -48,14 +47,14 @@ class MessageService
       ], 201);
   }
 
-  public static function getMessage(Message $message) {
-    if ($message->receiver == Auth::id()) {
+  public static function getMessage(string $id, Message $message) {
+    if ($message->receiver == $id) {
       if ($message->seen == false) {
         $message->seen = true;
         $message->save();
       }
       return new MessageResource($message);
-    } else if ($message->sender == Auth::id()) {
+    } else if ($message->sender == $id) {
       return new MessageResource($message);
     } else {
       return response()->json([
@@ -63,6 +62,10 @@ class MessageService
         'message' => 'Do not have permission to view this message'
       ], 403);
     }
+  }
+
+  public static function getNewMessagesCount(string $id) {
+    return Message::where('receiver', $id)->where('seen', false)->count();
   }
 
 }

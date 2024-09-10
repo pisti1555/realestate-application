@@ -3,13 +3,17 @@ import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { searchProperties } from "../../services/property";
 import { Search } from "@mui/icons-material";
-import '../../css/property_search/PropertySearchPage.css';
+
+import page_style from '../../css/property/property_search/PropertySearchPage.module.css';
+import form_style from '../../css/property/property_search/SearchPropertyForm.module.css';
+import results_style from '../../css/property/property_search/PropertyResults.module.css';
+
 import { PropertyInterface_Search, PropertyInterface_Get } from "../../interface/property/PropertyInterface";
 import Loading from "../../components/pages/loading/Loading";
 import ErrorPage from "../../components/pages/error/Error";
 
 
-const Property_Search = () => {
+const PropertySearch = () => {
   const [properties, setProperties] = useState<PropertyInterface_Get[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [errors, setErrors] = useState<string>('');
@@ -30,7 +34,7 @@ const Property_Search = () => {
     }).finally(() => {
       setLoading(false);
     });
-  }, [form.query]);
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,10 +55,10 @@ const Property_Search = () => {
   }
   
   return (
-    <div className="property-search-container">
-      <form className="search-form" onSubmit={handleSubmit}>
-        <div className="text-search-container">
-          <div className="text-input-container">
+    <div className={page_style.property_search_container}>
+      <form className={form_style.search_form} onSubmit={handleSubmit}>
+        <div className={form_style.text_search_container}>
+          <div className={form_style.text_input_container}>
             <Search />
             <input 
               type="text" 
@@ -64,12 +68,12 @@ const Property_Search = () => {
             />  
           </div>
         </div>
-        <div className="range-container">
-          <div className="price-range-container">
+        <div className={form_style.range_container}>
+          <div className={form_style.price_range_container}>
             <label htmlFor="price-range">Price Range:</label>
             <input
               type="range"
-              className="range-input"
+              className={form_style.range_input}
               id="price-range-min"
               min="0"
               max={form.maxPrice}
@@ -79,7 +83,7 @@ const Property_Search = () => {
             />
             <input
               type="range"
-              className="range-input"
+              className={form_style.range_input}
               id="price-range-max"
               min={form.minPrice}
               max="999999"
@@ -87,16 +91,16 @@ const Property_Search = () => {
               value={form.maxPrice}
               onChange={(e) => setForm({...form, maxPrice: Number(e.target.value)})}
             />
-            <div className="range-values">
+            <div className={form_style.range_values}>
               <span>Min Price: {form.minPrice}$</span>
               <span>Max Price: {form.maxPrice}$</span>
             </div>
           </div>
-          <div className="rating-range-container">
+          <div className={form_style.rating_range_container}>
             <label htmlFor="rating-range">Rating Range:</label>
             <input
               type="range"
-              className="range-input"
+              className={form_style.range_input}
               id="rating-range-min"
               min="0"
               max={form.maxRating}
@@ -106,7 +110,7 @@ const Property_Search = () => {
             />
             <input
               type="range"
-              className="range-input"
+              className={form_style.range_input}
               id="rating-range-max"
               min={form.minRating}
               max="5"
@@ -114,7 +118,7 @@ const Property_Search = () => {
               value={form.maxRating}
               onChange={(e) => setForm({...form, maxRating: Number(e.target.value)})}
             />
-            <div className="range-values">
+            <div className={form_style.range_values}>
               {form.minRating < 1 ? (
                 <span>Min rating: not rated</span>
               ) : (
@@ -124,7 +128,7 @@ const Property_Search = () => {
             </div>
           </div>
         </div>
-        <div className="order-by-container">
+        <div className={form_style.order_by_container}>
           <label htmlFor="order-by">Order by</label>
           <select id="order-by" onChange={(e) => setForm({...form, orderby: e.target.value})}>
             <option value="date-desc">Newest</option>
@@ -134,43 +138,43 @@ const Property_Search = () => {
             <option value="price-desc">Most expensive first</option>
           </select>
         </div>
-        <div className="button-container">
-          <button type="submit" className="submit-button">Search</button>
+        <div className={form_style.button_container}>
+          <button type="submit" className={form_style.submit_button}>Search</button>
         </div>
       </form>
 
-      <div className="property-results">
+      <div className={results_style.property_results}>
         {properties.length === 0 ? (
-          <div className="not-found">
+          <div className={results_style.not_found}>
             <h1>No properties found</h1>
           </div>
-          ) : (
-            <ul className="list">
-              {properties.map((property: any) => (
-                <li key={property.id} className="item">
-                  <div className="content">
-                    <img src={property.image} alt={property.title} />
-                    <div className="info">
-                      <strong>{property.title}</strong>
-                      <p>Price: {property.price}$</p>
-                      {property.rating === 0?(
-                        <p>Rating: unrated</p>
-                      ):(
-                        <p>Rating: {property.rating}</p>
-                      )}
-                      <p>Location: {property.city}, {property.postal_code}</p>
-                    </div>
+        ) : (
+          <ul className={results_style.list}>
+            {properties.map((property: any) => (
+              <li key={property.id} className={results_style.item}>
+                <div className={results_style.content}>
+                  <img src={property.image} alt={property.title} />
+                  <div className={results_style.info}>
+                    <strong>{property.title}</strong>
+                    <p>Price: {property.price}$</p>
+                    {property.rating === 0 ? (
+                      <p>Rating: unrated</p>
+                    ) : (
+                      <p>Rating: {property.rating}</p>
+                    )}
+                    <p>Location: {property.city}, {property.postal_code}</p>
                   </div>
-                  <div className="btn-container">
-                      <Link to={'/properties/' + property.id} className="kkk">Show</Link>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+                </div>
+                <div className={results_style.btn_container}>
+                  <Link to={'/properties/' + property.id} className={results_style.kkk}>Show</Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
 }
 
-export default Property_Search;
+export default PropertySearch;

@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { validateRegistrationForm } from '../../services/validate';
 import { register } from '../../services/auth';
 import { Image, Person, Mail, Call, Lock } from '@mui/icons-material';
-import '../../css/Auth.css';
+import css from '../../css/Auth.module.css';
 import RegistrationInterface from '../../interface/auth/registerInterface';
 
 const Register = ({ setUser }: { setUser: (user: any) => void }) => {
@@ -94,41 +94,41 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
   };
 
   return (
-    <div className="auth-main-container">
-      <div className="welcome">
+    <div className={css.auth_main_container}>
+      <div className={css.welcome}>
         <h1>Your Home Awaits</h1>
-        <p className='welcome-text'>
+        <p className={css.welcome_text}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsa? Excepturi blanditiis porro veritatis a temporibus aliquam sunt quae magnam voluptates dignissimos! Amet mollitia id in! Earum voluptatem ipsam voluptates?
         </p>
       </div>
 
-      <form onSubmit={submitForm} className='auth-form'>
-        {type === 1? (
+      <form onSubmit={submitForm} className={css.auth_form}>
+        {type === 1 ? (
           <h1>Register a new user account</h1>
         ) : (
           <h1>Register a new real-estate agent account</h1>
         )}
 
         {type === 2 && (
-          <div className="auth-group-container">
-            <div className={errors.image?"auth-invalid":"auth-group"}>
-              <label htmlFor="image_input" className='auth-label'>
+          <div className={css.auth_group_container}>
+            <div className={errors.image ? css.auth_invalid : css.auth_group}>
+              <label htmlFor="image_input" className={css.auth_label}>
                 <Image />
               </label>
               <input 
                 type="file" 
                 id="image_input" 
                 onChange={handleImage}
-                className='auth-input'
+                className={css.auth_input}
               />
             </div>
-            {errors.image && <p className='error-text'>{errors.image}</p>}
+            {errors.image && <p className={css.error_text}>{errors.image}</p>}
           </div>
         )}
 
-        <div className="auth-group-container">
-          <div className={errors.name?"auth-invalid":"auth-group"}>
-            <label htmlFor="name_input" className='auth-label'>
+        <div className={css.auth_group_container}>
+          <div className={errors.name ? css.auth_invalid : css.auth_group}>
+            <label htmlFor="name_input" className={css.auth_label}>
               <Person />
             </label>
             <input
@@ -137,16 +137,16 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
               placeholder="Enter your name"
               value={form.name}
               onChange={(e) => setForm({...form, name: e.target.value})}
-              className='auth-input'
+              className={css.auth_input}
               required
             />
           </div>
-          {errors.name && <p className='error-text'>{errors.name}</p>}
+          {errors.name && <p className={css.error_text}>{errors.name}</p>}
         </div>
 
-        <div className="auth-group-container">
-          <div className={errors.email?"auth-invalid":"auth-group"}>
-            <label htmlFor="email_input" className='auth-label'>
+        <div className={css.auth_group_container}>
+          <div className={errors.email ? css.auth_invalid : css.auth_group}>
+            <label htmlFor="email_input" className={css.auth_label}>
               <Mail />
             </label>
             <input
@@ -155,17 +155,17 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
               placeholder="Email address"
               value={form.email}
               onChange={(e) => setForm({...form, email: e.target.value})}
-              className='auth-input'
+              className={css.auth_input}
               required
             />
           </div>
-          {errors.email && <p className='error-text'>{errors.email}</p>}
+          {errors.email && <p className={css.error_text}>{errors.email}</p>}
         </div>
         
         {type === 2 && (
-          <div className="auth-group-container">
-            <div className={errors.phone?"auth-invalid":"auth-group"}>
-              <label htmlFor="phone_input" className='auth-label'>
+          <div className={css.auth_group_container}>
+            <div className={errors.phone ? css.auth_invalid : css.auth_group}>
+              <label htmlFor="phone_input" className={css.auth_label}>
                 <Call />
               </label>
               <input
@@ -174,17 +174,17 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
                 placeholder="Phone number"
                 value={form.phone}
                 onChange={(e) => setForm({...form, phone: e.target.value})}
-                className='auth-input'
+                className={css.auth_input}
                 required
               />
             </div>
-            {errors.phone && <p className='error-text'>{errors.phone}</p>}
+            {errors.phone && <p className={css.error_text}>{errors.phone}</p>}
           </div>
         )}
 
-        <div className="auth-group-container">
-          <div className={errors.password?"auth-invalid":"auth-group"}>
-            <label htmlFor="password_input" className='auth-label'>
+        <div className={css.auth_group_container}>
+          <div className={errors.password ? css.auth_invalid : css.auth_group}>
+            <label htmlFor="password_input" className={css.auth_label}>
               <Lock />
             </label>
             <input
@@ -193,43 +193,44 @@ const Register = ({ setUser }: { setUser: (user: any) => void }) => {
               placeholder="Password"
               value={form.password}
               onChange={(e) => setForm({...form, password: e.target.value})}
-              className='auth-input'
+              className={css.auth_input}
               required
             />
           </div>
-          {errors.password && <p className='error-text'>{errors.password}</p>}
+          {errors.password && <p className={css.error_text}>{errors.password}</p>}
         </div>
 
-        <div className="auth-group-container">
-            <div className={errors.password_confirm?"auth-invalid":"auth-group"}>
-              <label htmlFor="password_confirm_input" className='auth-label'>
-                <Lock />
-              </label>
-              <input 
-                type="password" 
-                onChange={(e) => setForm({...form, password_confirm: e.target.value})}
-                id="password_confirm_input" 
-                value={form.password_confirm}
-                placeholder="Confirm password"
-                className='auth-input'
-              />
-            </div>
-            {errors.password_confirm && <p className='error-text'>{errors.password_confirm}</p>}
+        <div className={css.auth_group_container}>
+          <div className={errors.password_confirm ? css.auth_invalid : css.auth_group}>
+            <label htmlFor="password_confirm_input" className={css.auth_label}>
+              <Lock />
+            </label>
+            <input 
+              type="password" 
+              onChange={(e) => setForm({...form, password_confirm: e.target.value})}
+              id="password_confirm_input" 
+              value={form.password_confirm}
+              placeholder="Confirm password"
+              className={css.auth_input}
+            />
           </div>
+          {errors.password_confirm && <p className={css.error_text}>{errors.password_confirm}</p>}
+        </div>
         
-          <button type="submit" className="auth-button">Register</button>
+        <button type="submit" className={css.auth_button}>Register</button>
 
-        {submitError && <p className='submit-error'>{submitError}</p>}
+        {submitError && <p className={css.submit_error}>{submitError}</p>}
 
         {type === 1 ? (
-          <p>If you would like to register as an agent <span className='redirect' onClick={() => {reset(2)}}>click here</span></p>
+          <p>If you would like to register as an agent <span className={css.redirect} onClick={() => {reset(2)}}>click here</span></p>
         ) : (
-          <p>If you would like to register as a user <span className='redirect' onClick={() => {reset(1)}}>click here</span></p>
+          <p>If you would like to register as a user <span className={css.redirect} onClick={() => {reset(1)}}>click here</span></p>
         )}
         
         <p>If you already have an account <Link to='/login'>login here</Link></p>
       </form>
     </div>
+
   );
 };
 

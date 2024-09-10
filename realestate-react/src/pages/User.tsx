@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../css/Profile.css';
+import css from '../css/Profile.module.css';
 import ErrorPage from "../components/pages/error/Error";
 import { Phone, Email } from "@mui/icons-material";
 import { UserInterface_Get } from "../interface/user/UserInterface";
@@ -13,30 +13,30 @@ const UserPage = ( {user} : {user:UserInterface_Get | null} ) => {
     }
 
     return (
-        <div className="profile-container">
-            <div className="button-container">
-                <Link to='/user/edit' className="profile-button">Edit profile</Link>
+        <div className={css.profile_container}>
+            <div className={css.button_container}>
+                <Link to='/user/edit' className={css.profile_button}>Edit profile</Link>
                 {user.role === 1 && (
-                    <Link to='/properties/create' className="profile-button">Create a property</Link>
+                    <Link to='/properties/create' className={css.profile_button}>Create a property</Link>
                 )}
             </div>
-            <div className="header">
+            <div className={css.header}>
                 {user.image && (
-                    <div className="image-container">
+                    <div className={css.image_container}>
                         <img src={user.image} alt={user.name} />
                     </div>
                 )}
-                <div className="info">
+                <div className={css.info}>
                     <h1>{user.name}</h1>
-                    <div className="info-row">
-                        <div className="svg-container">
+                    <div className={css.info_row}>
+                        <div className={css.svg_container}>
                             <Email />
                         </div>
                         <p>{user.email}</p>
                     </div>
                     {user.phone && (
-                        <div className="info-row">
-                            <div className="svg-container">
+                        <div className={css.info_row}>
+                            <div className={css.svg_container}>
                                 <Phone />
                             </div>
                             <p>{user.phone}</p>

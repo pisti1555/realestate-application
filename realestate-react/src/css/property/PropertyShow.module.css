@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-body {
+.property_show_page {
   font-family: Nunito, Arial, Helvetica, sans-serif;
-}
-
-.property-show-page {
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -14,7 +11,7 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.property-show-page .button-container {
+.button_container {
   display: flex;
   align-items: center;
   width: fit-content;
@@ -22,7 +19,7 @@ body {
   text-decoration: none;
   border-radius: 0.2em;
 }
-.property-show-page .button-container p {
+.button_container p {
   text-decoration: none;
   color: #000000;
   display: flex;
@@ -34,20 +31,20 @@ body {
   padding-inline: 0.5em;
   margin-right: 1em;
 }
-.property-show-page .button-container svg {
+.button_container svg {
   margin-left: 1em;
   font-size: 20px;
   transition: all 0.1s ease-in;
 }
-.property-show-page .button-container:hover > svg {
+.button_container:hover > svg {
   transform: translateX(-5px);
  }
  
- .property-show-page .button-container:hover {
-  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
- }
+.button_container:hover {
+box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+}
 
-.property-show-page #edit-button {
+.edit_button {
   padding: 0.5em 1.5em;
   background: #caf6c4;
   color: #000000;
@@ -59,48 +56,48 @@ body {
   align-self: flex-end;
   margin-right: 1em;
 }
-.property-show-page #edit-button:hover {
+.edit_button:hover {
   background: #21ae21;
   border: 1px solid #21ae21;
 }
 
-.img-container {
+.img_container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 2em;
 }
 
-.img-container img {
+.img_container img {
   max-width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title-section {
+.title_section {
   text-align: center;
   margin-bottom: 1em;
   padding-inline: 2em;
 }
 
-.title-section h1 {
+.title_section h1 {
   font-size: 2em;
   text-wrap: wrap;
 }
 
-.location-section {
+.location_section {
   padding-inline: 3em;
 }
-.location-section p {
+.location_section p {
   font-weight: bold;
 }
 
-.description-section p {
+.description_section p {
   padding: 2em;
 }
 
 
 
-.advertiser-section {
+.advertiser_section {
   background: #cef4ce;
   display: flex;
   flex-direction: column;
@@ -108,19 +105,19 @@ body {
   align-items: center;
 }
 
-.advertiser-section h1 {
+.advertiser_section h1 {
   font-size: 1.8em;
   text-shadow: 0 1px 2px rgb(0, 0, 0, 0.3);
   margin-bottom: 2em;
 }
 
-.advertiser-section .content {
+.content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.advertiser-section .image-container {
+.image_container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,25 +129,25 @@ body {
   box-shadow: 0 2px 5px rgb(0, 0, 0, 0.3);
   margin-bottom: 1em;
 }
-.advertiser-section .image-container img {
+.image_container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 0.5em;
 }
 
-.advertiser-section .info {
+.info {
   display: flex;
   flex-direction: column;
   justify-content: baseline;
   align-items: center;
   margin-inline: 3em;
 }
-.advertiser-section .info h1 {
+.info h1 {
   margin: 0 1em 1em 0;
   padding: 0;
 }
-.advertiser-section .info .info-row {
+.info_row {
   display: flex;
   align-items: center;
   padding: 0.5em 1em;
@@ -160,7 +157,7 @@ body {
   background: #92e396;
   box-shadow: 0 1px 5px rgb(0, 0, 0, 0.2);
 }
-.advertiser-section .info .svg-container {
+.svg_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -171,17 +168,17 @@ body {
   background: #000000;
 }
 
-.advertiser-section .info .info-row .svg-container svg {
+.svg_container svg {
   color: #ffffff;
 }
 
-.advertiser-section .contact {
+.contact {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin-left: 1em;
 }
-.advertiser-section .contact a {
+.contact a {
   text-align: center;
   border: 1px solid #92e396;
   color: #000000;
@@ -195,7 +192,7 @@ body {
   height: fit-content;
   margin: 0.5em;
 }
-.advertiser-section .contact a:hover {
+.contact a:hover {
   background: #57c85d;
   border: 1px solid #57c85d;
   color: #002b00;

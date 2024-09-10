@@ -2,7 +2,7 @@ import React, { useState, useEffect,  FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/auth';
 import LoginInterface from '../../interface/auth/login';
-import '../../css/Auth.css';
+import css from '../../css/Auth.module.css';
 import { Lock, Mail } from '@mui/icons-material';
 import { validateLoginForm } from '../../services/validate';
 
@@ -52,20 +52,20 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
 
   return (
     <>
-      <div className="auth-main-container">
-        <div className="welcome">
+      <div className={css.auth_main_container}>
+        <div className={css.welcome}>
           <h1>Welcome to realestate</h1>
           <h3>Your journey to finding the perfect property starts here.</h3>
-          <p className='welcome-text'>
+          <p className={css.welcome_text}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. A perspiciatis odio tempore eos optio veritatis odit voluptatem rem modi inventore? Debitis inventore molestias recusandae, repellendus impedit animi id ullam nemo!
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className='auth-form'>
+        <form onSubmit={handleSubmit} className={css.auth_form}>
           <h1>Login to you account</h1>
-          <div className="auth-group-container">
-            <div className={!valid?"auth-invalid":"auth-group"}>
-              <label htmlFor="email_input" className='auth-label'>
+          <div className={css.auth_group_container}>
+            <div className={!valid ? css.auth_invalid : css.auth_group}>
+              <label htmlFor="email_input" className={css.auth_label}>
                 <Mail />
               </label>
               <input 
@@ -74,15 +74,15 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
                 id="email_input" 
                 value={form.email}
                 placeholder="Email address"
-                className='auth-input'
+                className={css.auth_input}
               />
             </div>
-            {errors.email && <p className='error-text'>{errors.email}</p>}
+            {errors.email && <p className={css.error_text}>{errors.email}</p>}
           </div>
           
-          <div className="auth-group-container">
-            <div className={!valid?"auth-invalid":"auth-group"}>
-              <label htmlFor="password_input" className='auth-label'>
+          <div className={css.auth_group_container}>
+            <div className={!valid ? css.auth_invalid : css.auth_group}>
+              <label htmlFor="password_input" className={css.auth_label}>
                 <Lock />
               </label>
               <input 
@@ -91,14 +91,14 @@ const Login = ({ setUser }: { setUser: (user: any) => void }) => {
                 id="password_input" 
                 value={form.password}
                 placeholder="Password"
-                className='auth-input'
+                className={css.auth_input}
               />
             </div>
-            {errors.password && <p className='error-text'>{errors.password}</p>}
+            {errors.password && <p className={css.error_text}>{errors.password}</p>}
           </div>
           
-          <button type="submit" className="auth-button">Login</button>
-          {submitError && <p className='error-text'>{submitError}</p>}
+          <button type="submit" className={css.auth_button}>Login</button>
+          {submitError && <p className={css.error_text}>{submitError}</p>}
           <p>or if you do not have an account, <Link to="/register">register here</Link></p>
         </form>
       </div>

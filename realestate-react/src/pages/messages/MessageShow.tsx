@@ -8,9 +8,9 @@ import Loading from "../../components/pages/loading/Loading";
 
 import api from "../../services/api";
 
-import '../../css/messages/MessageShow.css';
+import css from '../../css/messages/MessageShow.module.css';
 
-import { Reply } from "@mui/icons-material";
+import { Reply, Person } from "@mui/icons-material";
 import { UserInterface_Get } from "../../interface/user/UserInterface";
 
 const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
@@ -58,29 +58,33 @@ const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
   }
 
   return (
-    <div id="message-show-container">
-      <div className="message">
+    <div className={css.message_show_container}>
+      <div className={css.message}>
         {message.sender.id !== (user.id) && (
-          <div className="button-container">
+          <div className={css.button_container}>
+            <Link to={'/profile/' + message.sender.id}>
+              <Person />
+              <p>View profile</p>
+            </Link>
             <Link to={'/messages/send/' + message.sender.id}>
               <Reply />
               <p>Reply</p>
             </Link>
           </div>
         )}
-        <div className="header">
-          <div className="image-container">
+        <div className={css.header}>
+          <div className={css.image_container}>
             <img src={message.sender.image} alt={message.sender.name} />
           </div>
-          <div className="msg-info">
-            <h1 id="sender">{message.sender.name}</h1>
-            <div className="time">
-              <h3 id="date">{new Date(message.time).toDateString()}</h3>
-              <h3 id="time">{new Date(message.time).toTimeString()}</h3>
+          <div className={css.msg_info}>
+            <h1 className={css.sender}>{message.sender.name}</h1>
+            <div className={css.time_container}>
+              <h3 className={css.date}>{new Date(message.time).toDateString()}</h3>
+              <h3 className={css.time}>{new Date(message.time).toTimeString()}</h3>
             </div>
           </div>
         </div>
-        <div id="message-content">
+        <div className={css.message_content}>
           <h1>{message.title}</h1>
           <p>{message.message}</p>
         </div>

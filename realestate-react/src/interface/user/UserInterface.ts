@@ -5,5 +5,6 @@ export interface UserInterface_Get {
   email: string,
   phone: string,
   joined: string,
-  role: number
+  role: number,
+  new_msg_count: number
 }

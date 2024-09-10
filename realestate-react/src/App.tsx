@@ -10,46 +10,71 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Logout from './components/pages/logout/Logout';
 
-import Home from './pages/Home';
+import Index from './pages/Index';
 import UserPage from './pages/User';
 import ProfilePage from './pages/Profile';
 
-import Property_Index from './pages/properties/PropertyIndex';
-import Property_Show from './pages/properties/PropertyShow';
-import Property_Create from './pages/properties/PropertyCreate';
-import Property_Edit from './pages/properties/PropertyEdit';
-import Property_Search from './pages/properties/PropertySearch';
+import PropertyIndex from './pages/properties/PropertyIndex';
+import PropertyShow from './pages/properties/PropertyShow';
+import PropertyCreate from './pages/properties/PropertyCreate';
+import PropertyEdit from './pages/properties/PropertyEdit';
+import PropertySearch from './pages/properties/PropertySearch';
 
 import MessageShow from './pages/messages/MessageShow';
 import MessageIndex from './pages/messages/MessageIndex';
 import MessageSend from './pages/messages/MessageSend';
 
 import Loading from './components/pages/loading/Loading';
+import { Message_Get } from './interface/MessagesInterface';
 
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<UserInterface_Get | null>(null);
+  const [receivedMessages, setReceivedMessages] = useState<Message_Get[]>([]);
+  const [sentMessages, setSentMessages] = useState<Message_Get[]>([]);
 
   useEffect(() => {
-    const getUser = async () => {
+    const init = async () => {
       if (!localStorage.getItem('token')) return;
       
+      setLoading(true);
       api.get('/user').then((response) => {
-        setLoading(true);
         if (response.status === 200) {
           setUser(response.data.data);
+          console.log(response.data.data);
+          
         } else {
           setUser(null);
         }
       }).catch((error:any) => {
         setUser(null);
+      });
+
+      api.get('/messages').then((response) => {
+        if (response.status === 200) {
+          setReceivedMessages(response.data.data);
+        } else {
+          setReceivedMessages([]);
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+
+      api.get('/messages/sent').then((response) => {
+        if (response.status === 200) {
+          setSentMessages(response.data.data);
+        } else {
+          setSentMessages([]);
+        }
+      }).catch((error) => {
+        console.log(error);
       }).finally(() => {
         setLoading(false);
       });
     };
 
-    getUser();
+    init();
   }, []);
 
   if (loading) {
@@ -69,18 +94,18 @@ function App() {
         <Route path="/logout" element={<Logout setUser={setUser} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
 
-        <Route path="/" element={<Home user={user} />} />
+        <Route path="/" element={<Index user={user} />} />
         <Route path="/user" element={<UserPage user={user} />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
 
-        <Route path="/properties" element={<Property_Index />} />
-        <Route path="/properties/:id" element={<Property_Show />} />
-        <Route path="/properties/create" element={<Property_Create />} />
-        <Route path="/properties/edit/:id" element={<Property_Edit />} />
-        <Route path="/search" element={<Property_Search />} />
-        <Route path="/search/:params" element={<Property_Search />} />
+        <Route path="/properties" element={<PropertyIndex />} />
+        <Route path="/properties/:id" element={<PropertyShow />} />
+        <Route path="/properties/create" element={<PropertyCreate />} />
+        <Route path="/properties/edit/:id" element={<PropertyEdit />} />
+        <Route path="/search" element={<PropertySearch />} />
+        <Route path="/search/:params" element={<PropertySearch />} />
 
-        <Route path="/messages" element={<MessageIndex user={user} />} />
+        <Route path="/messages" element={<MessageIndex user={user} receivedMessages={receivedMessages} sentMessages={sentMessages} />} />
         <Route path="/messages/:id" element={<MessageShow user={user} />} />
         <Route path="/messages/send/:id" element={<MessageSend user={user} />} />
 

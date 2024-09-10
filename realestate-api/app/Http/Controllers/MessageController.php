@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\MessageService;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -13,7 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return MessageService::getReceivedMessages();
+        return MessageService::getReceivedMessages(Auth::id());
     }
 
     /**
@@ -21,7 +22,7 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        return MessageService::sendMessage($request);
+        return MessageService::sendMessage(Auth::id(), $request);
     }
 
     /**
@@ -29,11 +30,11 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        return MessageService::getMessage($message);
+        return MessageService::getMessage(Auth::id(), $message);
     }
 
     public function sentMessages() {
-        return MessageService::getSentMessages();
+        return MessageService::getSentMessages(Auth::id());
     }
 
     /**

@@ -1,4 +1,4 @@
-.message-send-page {
+.message_send_page {
   font-family: Nunito, Arial, Helvetica, sans-serif;
   width: 60%;
   margin: 0 auto;
@@ -9,13 +9,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#message-send-form {
+.message_send_form {
   display: flex;
   flex-direction: column;
   background: #f9f9f9;
 }
 
-.vertical-group {
+.vertical_group {
   display: flex;
   flex-direction: column;
   margin-bottom: 2em;
@@ -29,7 +29,7 @@ label {
 }
 
 input[type="text"],
-#message-input {
+.message_input {
   width: 100%;
   padding: 1em;
   border: 1px solid #ccc;
@@ -41,26 +41,26 @@ input[type="text"],
 
 input[type="text"]:hover,
 input[type="text"]:focus,
-#message-input:hover,
-#message-input:focus {
+.message_input:hover,
+.message_input:focus {
   border: 1px solid #007BFF;
   outline: none;
 }
 
-#message-input {
+.message_input {
   min-height: 10em;
   width: 100%;
 }
 
-.button-container {
+.button_container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 80%;
 }
 
-.button-container a,
-.button-container button {
+.button_container a,
+.button_container button {
   text-decoration: none;
   color: #ffffff;
   padding: 0.5em 1em;
@@ -74,7 +74,7 @@ input[type="text"]:focus,
   margin: 0.5em;
 }
 
-.button-container a:hover,
-.button-container button:hover {
+.button_container a:hover,
+.button_container button:hover {
   background-color: #0056b3;
 }

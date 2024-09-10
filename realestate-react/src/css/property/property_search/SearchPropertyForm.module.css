@@ -1,5 +1,4 @@
-/* Alapvető beállítások a keresési űrlaphoz */
-.search-form {
+.search_form {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,7 +12,7 @@
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.search-form .text-search-container {
+.search_form .text_search_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +21,7 @@
   margin-bottom: 1.5em;
 }
 
-.search-form .text-search-container .text-input-container {
+.search_form .text_search_container .text_input_container {
   display: flex;
   box-sizing: border-box;
   width: 100%;
@@ -32,7 +31,7 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.search-form .text-search-container .text-input-container svg {
+.search_form .text_search_container .text_input_container svg {
   padding: 0.5em;
   background: #002fff;
   color: #ffffff;
@@ -40,7 +39,7 @@
   border-bottom-left-radius: 50px;
 }
 
-.search-form .text-search-container .text-input-container input {
+.search_form .text_search_container .text_input_container input {
   width: 100%;
   outline: none;
   border: none;
@@ -51,7 +50,7 @@
   border-bottom-right-radius: 50px;
 }
 
-.search-form .range-container {
+.search_form .range_container {
   width: 100%;
   padding: 1em;
   margin-bottom: 1em;
@@ -60,14 +59,14 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.search-form .range-container .price-range-container,
-.search-form .range-container .rating-range-container {
+.search_form .range_container .price_range_container,
+.search_form .range_container .rating_range_container {
   display: flex;
   flex-direction: column;
   padding-bottom: 1em;
 }
 
-.search-form .range-container .range-values {
+.search_form .range_container .range_values {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,7 +75,7 @@
   color: #444444;
 }
 
-.search-form .range-container .range-input {
+.search_form .range_container .range_input {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -87,7 +86,7 @@
   margin-bottom: 0.5em;
 }
 
-.search-form .range-container .range-input::-webkit-slider-thumb {
+.search_form .range_container .range_input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 1.2em;
@@ -97,7 +96,7 @@
   cursor: pointer;
 }
 
-.search-form .order-by-container {
+.search_form .order_by_container {
   width: 100%;
   padding: 1em;
   display: flex;
@@ -105,14 +104,14 @@
   margin-bottom: 1.5em;
 }
 
-.search-form .order-by-container label {
+.search_form .order_by_container label {
   font-weight: bold;
   font-size: 1em;
   margin-bottom: 0.5em;
   color: #444444;
 }
 
-.search-form .order-by-container select {
+.search_form .order_by_container select {
   width: 100%;
   padding: 0.5em;
   font-size: 1em;
@@ -125,6 +124,26 @@
   outline: none;
 }
 
-.search-form .button-container {
+.search_form .button_container {
+  display: flex;
+  justify-content: center;
   width: 100%;
+}
+
+.submit_button {
+  border: 2px solid #000000;
+  padding: 0.8em 1.5em;
+  background: #ffffff;
+  outline: none;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 5em;
+  cursor: pointer;
+  font-size: 1em;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.submit_button:hover,
+.submit_button:active {
+  color: #ffffff;
+  background: #000000;
 }
