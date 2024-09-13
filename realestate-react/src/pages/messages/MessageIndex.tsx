@@ -1,7 +1,8 @@
-import React, { useState }from "react";
+import React, { useState, useEffect }from "react";
   import { Link, useSearchParams } from "react-router-dom";
   
   import { Message_Get } from "../../interface/MessagesInterface";
+  import api from "../../services/api";
   
   import ErrorPage from "../../components/pages/error/Error";
 
@@ -10,14 +11,48 @@ import React, { useState }from "react";
   import css from '../../css/messages/MessageIndex.module.css';
 
   import { Mail, Send, Close } from "@mui/icons-material";
+import Loading from "../../components/pages/loading/Loading";
   
-  const MessageIndex = ({ user, receivedMessages, sentMessages } : { user:UserInterface_Get | null, receivedMessages:Message_Get[], sentMessages:Message_Get[] }) => {
+  const MessageIndex = ({ user } : { user:UserInterface_Get }) => {
     const [searchParams] = useSearchParams();
     const [isSuccessBoxVisible, setIsSuccessBoxVisible] = useState<boolean>(searchParams.has('send-success'));
+    const [receivedMessages, setReceivedMessages] = useState<Message_Get[]>([]);
+    const [sentMessages, setSentMessages] = useState<Message_Get[]>([]);
     const [received_sent_switch, setReceived_sent_switch] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+      setLoading(true);
+      api.get('/messages').then((response) => {
+        if (response.status === 200) {
+          setReceivedMessages(response.data.data);
+        } else {
+          setReceivedMessages([]);
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+
+      api.get('/messages/sent').then((response) => {
+        if (response.status === 200) {
+          setSentMessages(response.data.data);
+        } else {
+          setSentMessages([]);
+        }
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        setLoading(false);
+      });
+    }, []);
   
-    if (!user) {
+    if (user.id === -1) {
       return <ErrorPage errors={'Please log in'} />
+    }
+    if (loading) {
+      return(
+        <Loading />
+      );
     }
   
     return (

@@ -6,6 +6,7 @@ import Loading from "../../components/pages/loading/Loading";
 import api from "../../services/api";
 import css from '../../css/property/PropertyShow.module.css';
 import { ArrowBack, Email, Phone } from "@mui/icons-material";
+import person from '../../images/person.svg';
 
 const PropertyShow = () => {
     const [property, setProperty] = useState<PropertyInterface_Get | null>(null);
@@ -25,8 +26,6 @@ const PropertyShow = () => {
 
         api.get('/properties/' + id)
             .then((response) => {
-                console.log(response);
-                
                 setProperty(response.data.data);
             })
             .catch((error) => {
@@ -92,28 +91,35 @@ const PropertyShow = () => {
         <section className={css.advertiser_section}>
             <h1>Contact the advertiser</h1>
             <div className={css.content}>
-            <div className={css.image_container}>
-                <img src={property.user.image} alt={property.user.name} />
-            </div>
-            <div className={css.info}>
-                <h1>{property.user.name}</h1>
-                <div className={css.info_row}>
-                <div className={css.svg_container}>
-                    <Email />
+                <div className={css.image_container}>
+                    {property.user.image === '' ? (
+                        <img src={person} alt={property.user.name} />
+                    ) : (
+                        <img src={property.user.image} alt={property.user.name} />
+                    )}
+                    
                 </div>
-                <p>{property.user.email}</p>
+                <div className={css.info}>
+                    <h1>{property.user.name}</h1>
+                    <div className={css.info_row}>
+                        <div className={css.svg_container}>
+                            <Email />
+                        </div>
+                        <p>{property.user.email}</p>
+                    </div>
+                    {property.user.phone !== '' && (
+                        <div className={css.info_row}>
+                            <div className={css.svg_container}>
+                                <Phone />
+                            </div>
+                            <p>{property.user.phone}</p>
+                        </div>
+                    )}
                 </div>
-                <div className={css.info_row}>
-                <div className={css.svg_container}>
-                    <Phone />
+                <div className={css.contact}>
+                    <Link to={'/profile/' + property.user.id}>View profile</Link>
+                    <Link to={'/messages/send/' + property.user.id}>Send a direct message</Link>
                 </div>
-                <p>{property.user.phone}</p>
-                </div>
-            </div>
-            <div className={css.contact}>
-                <Link to={'/profile/' + property.user.id}>View profile</Link>
-                <Link to={'/messages/send/' + property.user.id}>Send a direct message</Link>
-            </div>
             </div>
         </section>
         </div>

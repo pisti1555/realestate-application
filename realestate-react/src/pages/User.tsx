@@ -4,9 +4,10 @@ import css from '../css/Profile.module.css';
 import ErrorPage from "../components/pages/error/Error";
 import { Phone, Email } from "@mui/icons-material";
 import { UserInterface_Get } from "../interface/user/UserInterface";
+import person from '../images/person.svg';
 
-const UserPage = ( {user} : {user:UserInterface_Get | null} ) => {
-    if (!user) {
+const UserPage = ( {user} : {user:UserInterface_Get} ) => {
+    if (user.id === -1) {
         return (
             <ErrorPage errors={'Please log in to view this page'} />
         );
@@ -21,20 +22,22 @@ const UserPage = ( {user} : {user:UserInterface_Get | null} ) => {
                 )}
             </div>
             <div className={css.header}>
-                {user.image && (
-                    <div className={css.image_container}>
-                        <img src={user.image} alt={user.name} />
-                    </div>
-                )}
+            <div className={css.image_container}>
+            {user.image === '' ? (
+                <img src={person} alt={user.name} />
+            ) : (
+                <img src={user.image} alt={user.name} />
+            )}
+            </div>
                 <div className={css.info}>
-                    <h1>{user.name}</h1>
+                    <h1>{user.name.toUpperCase()}</h1>
                     <div className={css.info_row}>
                         <div className={css.svg_container}>
                             <Email />
                         </div>
                         <p>{user.email}</p>
                     </div>
-                    {user.phone && (
+                    {user.phone !== '' && (
                         <div className={css.info_row}>
                             <div className={css.svg_container}>
                                 <Phone />

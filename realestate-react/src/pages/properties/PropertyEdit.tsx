@@ -213,10 +213,11 @@ const PropertyEdit = () => {
                     </div>
                 </div>
 
-                <div className={form_style.property_group} id={form_style.description_input}>
+                <div className={form_style.property_group_description} id={form_style.description_input}>
                     <label htmlFor="description">Description</label>
                     <textarea
                         id="description"
+                        className={form_style.description}
                         name="description"
                         value={form.description}
                         onChange={(e) => setForm({...form, description: e.target.value})}

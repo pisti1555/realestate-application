@@ -1,16 +1,15 @@
 import React from "react";
 import { useState, useEffect, FormEvent} from "react";
-import api from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 import { createProperty } from "../../services/property";
 import { PropertyInterface_Store } from "../../interface/property/PropertyInterface";
-import Loading from "../../components/pages/loading/Loading";
 import ErrorPage from "../../components/pages/error/Error";
 
 import page_style from '../../css/property/property_agent/PropertyCreatePage.module.css';
 import form_style from '../../css/property/property_agent/PropertyForm.module.css';
+import { UserInterface_Get } from "../../interface/user/UserInterface";
 
-const PropertyCreate = () => {
+const PropertyCreate = ({ user } : { user:UserInterface_Get }) => {
     const [form, setForm] = useState<PropertyInterface_Store>({
         image: null,
         title: '',
@@ -21,22 +20,10 @@ const PropertyCreate = () => {
         description: ''
     });
 
-    const [loading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<string>('');
     const [success, setSuccess] = useState<boolean>(false);
-    const [permission, setPermission] = useState<boolean>(false);
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        api.get('/user').then(response => {
-            if (response.data.role === 'agent') setPermission(true);
-        }).catch((error) => {
-            setErrors(error.message);
-        }).finally(() => {
-            setLoading(false);
-        });
-    }, []);
 
     useEffect(() => {
         if (success) {
@@ -67,13 +54,7 @@ const PropertyCreate = () => {
         }
     };
 
-    if (loading) {
-        return (
-            <Loading />
-        );
-    }
-
-    if (!permission) {
+    if (user.role !== 1) {
         return (
             <ErrorPage errors={"You do not have permission to visit this page"} />
         );
@@ -184,10 +165,11 @@ const PropertyCreate = () => {
                     </div>
                 </div>
 
-                <div className={form_style.property_group} id={form_style.description_input}>
+                <div className={form_style.property_group_description} id={form_style.description_input}>
                     <label htmlFor="description">Description</label>
                     <textarea
                         id="description"
+                        className={form_style.description}
                         name="description"
                         value={form.description}
                         onChange={(e) => setForm({...form, description: e.target.value})}

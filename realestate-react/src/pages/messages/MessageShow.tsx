@@ -13,6 +13,8 @@ import css from '../../css/messages/MessageShow.module.css';
 import { Reply, Person } from "@mui/icons-material";
 import { UserInterface_Get } from "../../interface/user/UserInterface";
 
+import person from '../../images/person.svg';
+
 const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
   const { id } = useParams<{ id: string }>();
   const [message, setMessage] = useState<Message_Get | null>(null);
@@ -25,7 +27,6 @@ const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
       }
     ).catch(
       (e) => {
-        console.log('log errors:', e);
         return (
           <ErrorPage errors={e} />
         );
@@ -74,7 +75,11 @@ const MessageShow = ({ user } : { user:UserInterface_Get | null }) => {
         )}
         <div className={css.header}>
           <div className={css.image_container}>
-            <img src={message.sender.image} alt={message.sender.name} />
+            {message.sender.image === '' ? (
+              <img src={person} alt={message.sender.name} />
+            ) : (
+              <img src={message.sender.image} alt={message.sender.name} />
+            )}
           </div>
           <div className={css.msg_info}>
             <h1 className={css.sender}>{message.sender.name}</h1>

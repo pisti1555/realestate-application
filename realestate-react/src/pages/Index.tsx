@@ -1,9 +1,10 @@
 import React from "react";
 import { useSearchParams, Link } from 'react-router-dom';
 import css from '../css/Index.module.css';
+import { UserInterface_Get } from "../interface/user/UserInterface";
 
 
-const Index = ({ user } : { user:any }) => {
+const Index = ({ user } : { user:UserInterface_Get }) => {
   const [searchParams] = useSearchParams();
   const registered = searchParams.has('registration-success');
   const loggedIn = searchParams.has('login-success');

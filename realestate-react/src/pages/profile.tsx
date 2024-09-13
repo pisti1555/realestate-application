@@ -5,6 +5,7 @@ import css from '../css/Profile.module.css';
 import Loading from "../components/pages/loading/Loading";
 import ErrorPage from "../components/pages/error/Error";
 import { Phone, Email } from "@mui/icons-material";
+import person from '../images/person.svg';
 
 const ProfilePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +45,7 @@ const ProfilePage = () => {
     );
   }
 
-  if (!user) {
+  if (user.id === -1) {
     return (
       <ErrorPage errors={"No user found on this link"} />
     );
@@ -58,22 +59,28 @@ const ProfilePage = () => {
         </div>
         <div className={css.header}>
           <div className={css.image_container}>
-            <img src={user.image} alt={user.name} />
+            {user.image === '' ? (
+              <img src={person} alt={user.name} />
+            ) : (
+              <img src={user.image} alt={user.name} />
+            )}
           </div>
           <div className={css.info}>
-              <h1>{user.name}</h1>
+              <h1>{user.name.toUpperCase()}</h1>
               <div className={css.info_row}>
                 <div className={css.svg_container}>
                   <Email />
                 </div>
                 <p>{user.email}</p>
               </div>
-              <div className={css.info_row}>
-                <div className={css.svg_container}>
-                  <Phone />
+              {user.phone !== '' && (
+                <div className={css.info_row}>
+                  <div className={css.svg_container}>
+                    <Phone />
+                  </div>
+                  <p>{user.phone}</p>
                 </div>
-                <p>{user.phone}</p>
-              </div>
+              )}
             </div>
         </div>
       </div>

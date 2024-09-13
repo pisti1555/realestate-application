@@ -9,6 +9,9 @@
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
   box-shadow: 0 5px 10px rgb(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image_container {
@@ -39,6 +42,7 @@
 
 .flex_horizontal {
   display: flex;
+  justify-content: center;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -61,15 +65,33 @@
   outline: none;
 }
 
-.description_input {
-  width: 80%;
+.property_group_description {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  width: 90%;
+  padding-inline: 1em;
 }
+.property_group_description label {
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #000000;
+}
+
 .description {
-  height: 10em;
-  padding: 1em;
+  height: 20em;
   border: 1px solid #ccc;
   border-radius: 0.5em;
   outline: none;
+  transition: border 0.2s ease-in-out;
+  padding: 1em;
+}
+
+.property_group input:hover,
+.property_group input:active,
+.description:hover,
+.description:active {
+  border: 1px solid #000dff;
 }
 
 .submit_button,
@@ -81,7 +103,7 @@
   font-weight: 600;
   border-radius: 1em;
   cursor: pointer;
-  transition: background 0.1s, color 0.1s;
+  transition: background 0.2s, color 0.2s;
   text-decoration: none;
   font-size: 1em;
   width: 40%;

@@ -30,9 +30,16 @@ import { Message_Get } from './interface/MessagesInterface';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [user, setUser] = useState<UserInterface_Get | null>(null);
-  const [receivedMessages, setReceivedMessages] = useState<Message_Get[]>([]);
-  const [sentMessages, setSentMessages] = useState<Message_Get[]>([]);
+  const [user, setUser] = useState<UserInterface_Get>({
+    id: -1,
+    image: '',
+    name: '',
+    email: '',
+    phone: '',
+    joined: '',
+    role: -1,
+    new_msg_count: 0
+  });
 
   useEffect(() => {
     const init = async () => {
@@ -45,33 +52,31 @@ function App() {
           console.log(response.data.data);
           
         } else {
-          setUser(null);
+          setUser({
+            id: -1,
+            image: '',
+            name: '',
+            email: '',
+            phone: '',
+            joined: '',
+            role: -1,
+            new_msg_count: 0
+          });
         }
       }).catch((error:any) => {
-        setUser(null);
-      });
-
-      api.get('/messages').then((response) => {
-        if (response.status === 200) {
-          setReceivedMessages(response.data.data);
-        } else {
-          setReceivedMessages([]);
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
-
-      api.get('/messages/sent').then((response) => {
-        if (response.status === 200) {
-          setSentMessages(response.data.data);
-        } else {
-          setSentMessages([]);
-        }
-      }).catch((error) => {
-        console.log(error);
+        setUser({
+          id: -1,
+          image: '',
+          name: '',
+          email: '',
+          phone: '',
+          joined: '',
+          role: -1,
+          new_msg_count: 0
+        });
       }).finally(() => {
         setLoading(false);
-      });
+      });;
     };
 
     init();
@@ -100,12 +105,12 @@ function App() {
 
         <Route path="/properties" element={<PropertyIndex />} />
         <Route path="/properties/:id" element={<PropertyShow />} />
-        <Route path="/properties/create" element={<PropertyCreate />} />
+        <Route path="/properties/create" element={<PropertyCreate user={user} />} />
         <Route path="/properties/edit/:id" element={<PropertyEdit />} />
         <Route path="/search" element={<PropertySearch />} />
         <Route path="/search/:params" element={<PropertySearch />} />
 
-        <Route path="/messages" element={<MessageIndex user={user} receivedMessages={receivedMessages} sentMessages={sentMessages} />} />
+        <Route path="/messages" element={<MessageIndex user={user} />} />
         <Route path="/messages/:id" element={<MessageShow user={user} />} />
         <Route path="/messages/send/:id" element={<MessageSend user={user} />} />
 

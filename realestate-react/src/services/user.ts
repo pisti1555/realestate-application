@@ -11,7 +11,6 @@ export const getUser = async () : Promise<UserInterface_Get | undefined> => {
       return null;
     }
   }).catch((error:any) => {
-    console.log(error);
     return null;
   });
 };

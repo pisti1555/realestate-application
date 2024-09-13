@@ -1,5 +1,5 @@
 export interface UserInterface_Get {
-  id: string,
+  id: number,
   image: string,
   name: string,
   email: string,
