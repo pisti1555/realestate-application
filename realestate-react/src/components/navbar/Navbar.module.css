@@ -1,0 +1,235 @@
+.navbar,
+.navbar_closed {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: #001121;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: width 0.5s ease, height 0.5s ease;
+}
+.navbar {
+  width: 20em;
+}
+.navbar_closed {
+  width: 5em;
+}
+
+.navbar .menu_button,
+.navbar_closed .menu_button {
+  border: none;
+  background: transparent;
+  padding: 2em;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 2em;
+  box-sizing: border-box;
+  transition: border-radius 0.2s, background-color 0.2s;
+  color: #ececec;
+}
+
+.navbar .option,
+.navbar_closed .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  margin-bottom: 2em;
+  width: 100%;
+  height: 5em;
+  color: #ececec;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: border-radius 0.2s, background-color 0.2s;
+}
+.navbar_closed .option {
+  border-radius: 50%;
+}
+.navbar .option svg {
+  animation: fadeIn 1s;
+  color: #ececec;
+}
+.navbar_closed .option svg {
+  color: #ececec;
+}
+.navbar .option .msg_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(-180%, 60%);
+  border: none;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  font-size: 0.9em;
+  background: #ececec;
+  color: #000000;
+  padding: 0.1em;
+  text-decoration: none;
+  animation: fadeIn 1.5s;
+}
+.navbar_closed .option .msg_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(60%, 60%);
+  border: none;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  font-size: 0.9em;
+  background: #ececec;
+  color: #000000;
+  padding: 0.1em;
+  text-decoration: none;
+}
+.navbar .option p {
+  display: inline-flex;
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+  animation: slideIn 1s;
+  color: #ececec;
+}
+.navbar_closed .option p {
+  display: none;
+  animation: slideOut 1s;
+}
+
+.menu_button:hover,
+.option:hover {
+  background-color: #002345a0;
+  border-radius: 2em;
+}
+.option:hover p {
+  color: #ffffff;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-3em);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translate(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-3em);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .navbar,
+  .navbar_closed {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #001121;
+    display: flex;
+
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: height 0.5s ease;
+    overflow: hidden;
+  }
+
+  .navbar {
+    height: 100%;
+    min-height: 90vh;
+    flex-direction: column;
+  }
+
+  .navbar_closed {
+    height: fit-content;
+    flex-direction: row;
+  }
+
+  .navbar .menu-button,
+  .navbar_closed .menu_button {
+    padding: 0.5em;
+    margin: 0;
+    width: auto;
+    height: auto;
+  }
+
+  .navbar .option,
+  .navbar_closed .option {
+    padding: 0.5em;
+    margin: 0;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+  }
+
+  .navbar_closed .option {
+    border-radius: 0;
+  }
+
+
+  .navbar_closed .option p {
+    display: none;
+  }
+  
+  .navbar .option svg,
+  .navbar_closed .option svg {
+    margin: 0;
+    padding: 0;
+    width: 0.8em;
+    height: 0.8em;
+  }
+
+  .menu_button:hover,
+  .option:hover {
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+
+

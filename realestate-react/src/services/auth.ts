@@ -1,6 +1,6 @@
 import api from './api';
-import LoginInterface from '../interface/auth/login';
-import RegistrationInterface from '../interface/auth/registerInterface';
+import LoginInterface from '../interface/auth/LoginInterface';
+import RegistrationInterface from '../interface/auth/RegisterInterface';
 
 export const register = async (form:RegistrationInterface) => {
     try {

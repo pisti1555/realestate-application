@@ -1,42 +1,92 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './services/api';
+
+import { UserInterface_Get } from './interface/UserInterface';
+
 import NavBar from './components/navbar/Navbar';
 
-import Login from './pages/auth/login';
-import Register from './pages/auth/register';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 import Logout from './components/pages/logout/Logout';
 
-import Home from './pages/home';
-import Profile from './pages/profile';
+import Index from './pages/Index';
+import UserPage from './pages/User';
+import ProfilePage from './pages/Profile';
 
-import Property_Index from './pages/properties/property_index';
-import Property_Show from './pages/properties/property_show';
-import Property_Create from './pages/properties/property_create';
-import Property_Edit from './pages/properties/property_edit';
-import Property_Search from './pages/properties/property_search';
+import PropertyIndex from './pages/properties/PropertyIndex';
+import PropertyShow from './pages/properties/PropertyShow';
+import PropertyCreate from './pages/properties/PropertyCreate';
+import PropertyEdit from './pages/properties/PropertyEdit';
+import PropertySearch from './pages/properties/PropertySearch';
+
+import MessageShow from './pages/messages/MessageShow';
+import MessageIndex from './pages/messages/MessageIndex';
+import MessageSend from './pages/messages/MessageSend';
+
+import Loading from './components/pages/loading/Loading';
+import { Message_Get } from './interface/MessagesInterface';
 
 
 function App() {
-  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [user, setUser] = useState<UserInterface_Get>({
+    id: -1,
+    image: '',
+    name: '',
+    email: '',
+    phone: '',
+    joined: '',
+    role: -1,
+    new_msg_count: 0
+  });
 
   useEffect(() => {
-    const getUser = async () => {
+    const init = async () => {
       if (!localStorage.getItem('token')) return;
-      try {
-        const response = await api.get('/user');
+      
+      setLoading(true);
+      api.get('/user').then((response) => {
         if (response.status === 200) {
-          setUser(response.data);
+          setUser(response.data.data);
+          console.log(response.data.data);
+          
         } else {
-          setUser(null);
+          setUser({
+            id: -1,
+            image: '',
+            name: '',
+            email: '',
+            phone: '',
+            joined: '',
+            role: -1,
+            new_msg_count: 0
+          });
         }
-      } catch (error: any) {
-        setUser(null);
-      }
+      }).catch((error:any) => {
+        setUser({
+          id: -1,
+          image: '',
+          name: '',
+          email: '',
+          phone: '',
+          joined: '',
+          role: -1,
+          new_msg_count: 0
+        });
+      }).finally(() => {
+        setLoading(false);
+      });;
     };
 
-    getUser();
+    init();
   }, []);
+
+  if (loading) {
+    return(
+      <Loading />
+    );
+  }
 
 
   return (
@@ -49,15 +99,20 @@ function App() {
         <Route path="/logout" element={<Logout setUser={setUser} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
 
-        <Route path="/" element={<Home user={user} />} />
-        <Route path="/user" element={<Profile />} />
+        <Route path="/" element={<Index user={user} />} />
+        <Route path="/user" element={<UserPage user={user} />} />
+        <Route path="/profile/:id" element={<ProfilePage />} />
 
-        <Route path="/properties" element={<Property_Index />} />
-        <Route path="/properties/:id" element={<Property_Show />} />
-        <Route path="/properties/create" element={<Property_Create />} />
-        <Route path="/properties/edit/:id" element={<Property_Edit />} />
-        <Route path="/search" element={<Property_Search />} />
-        <Route path="/search/:params" element={<Property_Search />} />
+        <Route path="/properties" element={<PropertyIndex />} />
+        <Route path="/properties/:id" element={<PropertyShow />} />
+        <Route path="/properties/create" element={<PropertyCreate user={user} />} />
+        <Route path="/properties/edit/:id" element={<PropertyEdit />} />
+        <Route path="/search" element={<PropertySearch />} />
+        <Route path="/search/:params" element={<PropertySearch />} />
+
+        <Route path="/messages" element={<MessageIndex user={user} />} />
+        <Route path="/messages/:id" element={<MessageShow user={user} />} />
+        <Route path="/messages/send/:id" element={<MessageSend user={user} />} />
 
       </Routes>
     </Router>

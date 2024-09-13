@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.property_container {
+  font-family: Nunito, Arial, Helvetica, sans-serif;
+  margin: auto;
+  width: 70%;
+  min-height: 100vh;
+}
+
+.property_container h1 {
+  text-align: center;
+}

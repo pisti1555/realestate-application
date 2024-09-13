@@ -1,0 +1,80 @@
+.message_send_page {
+  font-family: Nunito, Arial, Helvetica, sans-serif;
+  width: 60%;
+  margin: 0 auto;
+  padding: 2em;
+  padding-left: 5em;
+  background: #f9f9f9;
+  border-radius: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.message_send_form {
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+}
+
+.vertical_group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  width: 80%;
+}
+
+label {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: #494949;
+}
+
+input[type="text"],
+.message_input {
+  width: 100%;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  background: #fff;
+  transition: border 0.2s ease;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus,
+.message_input:hover,
+.message_input:focus {
+  border: 1px solid #007BFF;
+  outline: none;
+}
+
+.message_input {
+  min-height: 10em;
+  width: 100%;
+}
+
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80%;
+}
+
+.button_container a,
+.button_container button {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.5em 1em;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  font-size: 1em;
+  margin: 0.5em;
+}
+
+.button_container a:hover,
+.button_container button:hover {
+  background-color: #0056b3;
+}

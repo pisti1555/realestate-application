@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+  --main_color: #00297a;
+  --error_color: #b80000;
+  --error_svg: #400000;
+}
+
+*{
+  font-family: Nunito, Arial, Helvetica, sans-serif;
+}
+
+.auth_main_container .auth_form  .redirect,
+.auth_main_container .auth_form  a {
+  color: #000000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.auth_main_container .auth_form  .redirect:hover,
+.auth_main_container .auth_form  a:hover {
+  text-shadow: 1px 0 4px#000000;
+}
+.auth_main_container .auth_form  p {
+  text-align: center;
+}
+
+.auth_main_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  background-image: url('../images/auth.jpg');
+  background-size: cover;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.auth_main_container .welcome {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 3em;
+  color: #ffffff;
+  backdrop-filter: blur(5px) brightness(60%);
+}
+
+.auth_main_container .welcome .welcome_text {
+  max-width: 60%;
+  padding: 1em 0 3em 0;
+}
+
+.auth_main_container .auth_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: max(60%, 800px);
+  min-height: 100%;
+  background: #e8e8e8;
+  gap: 1em;
+}
+
+.auth_main_container .auth_form  h1 {
+  text-align: center;
+}
+
+.auth_main_container .auth_form .auth_group_container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.auth_main_container .auth_form .auth_group_container .auth_group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 100%;
+  box-sizing: border-box;
+}
+.auth_main_container .auth_form .auth_group_container .auth_group .auth_label {
+  box-sizing: border-box;
+  padding: 0.5em;
+  margin: 0;
+  border: 2px solid var(--main_color);
+  border-radius: 10px 0 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--main_color);
+  color: #ffffff;
+}
+
+.auth_main_container .auth_form .auth_group_container .auth_group .auth_input {
+  box-sizing: border-box;
+  height: 100%;
+  border: 2px solid #e2f5ff;
+  background-color: #e2f5ff;
+  border-radius: 0 10px 10px 0;
+  outline: none;
+  padding: 0.5em; 
+  font-size: 0.9em;
+  flex-grow: 1;
+}
+.auth_main_container .auth_form .auth_group_container .auth_group .auth_input:focus {
+  border: 2px solid #000000;
+  border-left: none;
+}
+.auth_main_container .auth_form .auth_group_container .auth_group:focus-within .auth_label {
+  border: 2px solid #000000;
+  border-right: none;
+}
+
+.auth_main_container .auth_form .auth_group_container .auth_invalid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 100%;
+}
+.auth_main_container .auth_form .auth_group_container .auth_invalid .auth_label {
+  box-sizing: border-box;
+  padding: 0.5em;
+  border: 2px solid var(--error_color);
+  border-radius: 10px 0 0 10px;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--error_color);
+  color: #300000;
+}
+.auth_main_container .auth_form .auth_group_container .auth_invalid .auth_input {
+  box-sizing: border-box;
+  height: 100%;
+  border: 2px solid #e2f5ff;
+  background-color: #e2f5ff;
+  border-radius: 0 10px 10px 0;
+  outline: none;
+  padding: 0.5em; 
+  font-size: 0.9em;
+  flex-grow: 1;
+}
+.auth_main_container .auth_form .auth_group_container .auth_invalid .auth_input {
+  border: 2px solid var(--error_color);
+  border-left: none;
+}
+.auth_main_container .auth_form .auth_group_container .auth_invalid:focus-within .auth_label {
+  background: var(--error_color);
+  border: 2px solid var(--error_color);
+  border-right: none;
+}
+
+.error_text,
+.submit_error {
+  color: #930000;
+  padding-left: 1em;
+}
+
+.auth_button {
+  padding: 0.5em 1em;
+  border: 2px solid #000000;
+  background: #ffffff;
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: 5em;
+  cursor: pointer;
+  color: #000000;
+  transition: background 0.1s ease, color 0.1s ease;
+  width: 60%;
+}
+.auth_button:hover,
+.auth_button:active {
+  background: #000000;
+  color: #ffffff;
+}
+
+@media(max-width: 1200px) {
+  *{
+    font-size: large;
+  }
+
+  .welcome {
+    display: none;
+  }
+
+  .auth_main_container .auth_form  {
+    width: 100%;
+  }
+
+  .auth_group {
+    width: 80%;
+  }
+}

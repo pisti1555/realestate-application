@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePropertyRequest extends FormRequest
+class StoreMessageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->tokenCan('store-property');
+        return true;
     }
 
     /**
@@ -22,14 +22,10 @@ class StorePropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image'=> ['required', 'image', 'mimes:jpeg, jpg'],
+            'sender' => ['numeric', 'exists:users,id'],
+            'receiver' => ['required', 'numeric', 'exists:users,id'],
             'title' => ['required', 'string', 'min:1', 'max:30'],
-            'price' => ['required', 'numeric', 'min:100'],
-            'description' => ['required', 'string', 'max:500'],
-            'city' => ['required', 'string', 'max:20'],
-            'postal_code' => ['required', 'string', 'max:10'],
-            'address' => ['required', 'string', 'max:50'],
-            'rating' => ['numeric', 'min:0', 'max:0']
+            'message' => ['required', 'string', 'min:20', 'max:500']
         ];
     }
 }

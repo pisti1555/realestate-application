@@ -23,6 +23,7 @@ class PropertyResource extends JsonResource
             "city" => $this->city,
             "postal_code" => $this->postal_code,
             "address" => $this->address,
+            "user" => new UserResource($this->user)
         ];
     }
 }

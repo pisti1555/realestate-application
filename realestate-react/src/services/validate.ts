@@ -1,5 +1,5 @@
-import LoginInterface from "../interface/auth/login";
-import RegistrationInterface from "../interface/auth/registerInterface";
+import LoginInterface from "../interface/auth/LoginInterface";
+import RegistrationInterface from "../interface/auth/RegisterInterface";
 
 export const validateLoginForm = (form:LoginInterface) => {
   let emailValid = false;

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -104,14 +105,14 @@ class AuthService
                 'delete-property'
               ]
             )->plainTextToken,
-            'user' => $user,
+            'user' => new UserResource($user)
           ], 200);
         } else if ($user->hasRole('user')){
           return response()->json([
             'status' => true,
             'message' => 'Success',
             'token' => $user->createToken('UserToken', ['view-property', 'comment'])->plainTextToken,
-            'user' => $user,
+            'user' => new UserResource($user),
           ], 200);
         } else {
           return response()->json([

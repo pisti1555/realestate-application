@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.property_index {
+  font-family: Nunito, Arial, Helvetica, sans-serif;
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 5em;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  width: 400px;
+  height: 500px;
+  margin-bottom: 2em;
+}
+
+.item img {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.item .info {
+  padding: 1em;
+}
+
+.item strong {
+  font-size: 1.5em;
+}
+
+.button_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.button_container a {
+  width: 100%;
+  padding: 0.5em 1em;
+  background: #ffffff;
+  border: 1px solid black;
+  border-radius: 1em;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  transition: background 0.1s, color 0.1s;
+}
+
+.button_container a:hover {
+  background: #000000;
+  color: #ffffff;
+}
