@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import css from '../css/Profile.module.css';
 import ErrorPage from "../components/pages/error/Error";
 import { Phone, Email } from "@mui/icons-material";
-import { UserInterface_Get } from "../interface/user/UserInterface";
+import { UserInterface_Get } from "../interface/UserInterface";
 import person from '../images/person.svg';
 
 const UserPage = ( {user} : {user:UserInterface_Get} ) => {

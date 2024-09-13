@@ -1,5 +1,5 @@
 import React from "react";
-import { UserInterface_Get } from "../../interface/user/UserInterface";
+import { UserInterface_Get } from "../../interface/UserInterface";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import navbar from '../../components/navbar/Navbar.module.css';

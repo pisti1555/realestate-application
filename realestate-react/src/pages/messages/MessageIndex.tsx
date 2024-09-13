@@ -6,7 +6,7 @@ import React, { useState, useEffect }from "react";
   
   import ErrorPage from "../../components/pages/error/Error";
 
-  import { UserInterface_Get } from "../../interface/user/UserInterface";
+  import { UserInterface_Get } from "../../interface/UserInterface";
   
   import css from '../../css/messages/MessageIndex.module.css';
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './services/api';
 
-import { UserInterface_Get } from './interface/user/UserInterface';
+import { UserInterface_Get } from './interface/UserInterface';
 
 import NavBar from './components/navbar/Navbar';
 

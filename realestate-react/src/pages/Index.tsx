@@ -1,7 +1,7 @@
 import React from "react";
 import { useSearchParams, Link } from 'react-router-dom';
 import css from '../css/Index.module.css';
-import { UserInterface_Get } from "../interface/user/UserInterface";
+import { UserInterface_Get } from "../interface/UserInterface";
 
 
 const Index = ({ user } : { user:UserInterface_Get }) => {

@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { sendMessage } from "../../services/message";
 import { Message_Post } from "../../interface/MessagesInterface";
 import { validateMessageSendForm } from "../../services/validateMessage";
-import { UserInterface_Get } from "../../interface/user/UserInterface";
+import { UserInterface_Get } from "../../interface/UserInterface";
 import ErrorPage from "../../components/pages/error/Error";
 import css from '../../css/messages/MessageSend.module.css';
 

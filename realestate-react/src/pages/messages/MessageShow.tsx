@@ -11,7 +11,7 @@ import api from "../../services/api";
 import css from '../../css/messages/MessageShow.module.css';
 
 import { Reply, Person } from "@mui/icons-material";
-import { UserInterface_Get } from "../../interface/user/UserInterface";
+import { UserInterface_Get } from "../../interface/UserInterface";
 
 import person from '../../images/person.svg';
 

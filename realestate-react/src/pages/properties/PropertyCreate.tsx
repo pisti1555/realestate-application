@@ -7,7 +7,7 @@ import ErrorPage from "../../components/pages/error/Error";
 
 import page_style from '../../css/property/property_agent/PropertyCreatePage.module.css';
 import form_style from '../../css/property/property_agent/PropertyForm.module.css';
-import { UserInterface_Get } from "../../interface/user/UserInterface";
+import { UserInterface_Get } from "../../interface/UserInterface";
 
 const PropertyCreate = ({ user } : { user:UserInterface_Get }) => {
     const [form, setForm] = useState<PropertyInterface_Store>({
