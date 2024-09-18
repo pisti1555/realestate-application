@@ -17,7 +17,7 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1,3),
+            'user_id' => $this->faker->numberBetween(1,5),
             'image' => 'https://picsum.photos/1920/1080',
             'title' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2,100,999999),

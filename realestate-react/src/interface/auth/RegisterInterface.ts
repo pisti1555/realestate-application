@@ -3,6 +3,14 @@ export default interface RegistrationInterface {
   email:string,
   password: string,
   password_confirm: string,
-  image: File|null,
-  phone: string
+  image: File | null,
+  phone: string,
+  description: string,
+  tax_number: string,
+  sex: string,
+  country: string,
+  city: string,
+  postal_code: string,
+  birth_date: string,
+  agency: string
 }

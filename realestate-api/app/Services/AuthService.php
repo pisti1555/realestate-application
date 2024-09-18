@@ -19,12 +19,11 @@ class AuthService
     $AGENT = 2;
     $type = $USER;
 
-    $exists = User::where('email', $request->email)->first();
-    if ($exists) {
+    if (User::where('email', $request->email)->exists()) {
         return response()->json([
             'status' => false,
             'message' => 'A user with this email already exists.',
-        ]);
+        ], 409);
     }
 
     if ($request->phone && $request->image) {
@@ -39,7 +38,9 @@ class AuthService
           return AuthService::createUser([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password'])
+            'password' => Hash::make($validated['password']),
+            'birth_date' => $validated['birth_date'],
+            'sex' => $validated['sex']
           ]);
         }
 
@@ -51,14 +52,21 @@ class AuthService
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'image' => $validated['image'],
-            'phone' => $validated['phone']
+            'phone' => $validated['phone'],
+            'description' => $validated['description'],
+            'birth_date' => $validated['birth_date'],
+            'sex' => $validated['sex'],
+            'tax_number' => $validated['tax_number'],
+            'country' => $validated['country'],
+            'city' => $validated['city'],
+            'postal_code' => $validated['postal_code'],
           ]);
         }
 
         default: {
           return response()->json([
             'status'=> false,
-            'message'=> 'An error occoured on the server side',
+            'message'=> 'An error occoured on the server side'
           ], 500);
         }
       }
@@ -72,7 +80,8 @@ class AuthService
     } catch (\Exception $e) {
         return response()->json([
             'status' => false,
-            'message' => 'An unexpected error occurred on the server side'
+            'message' => 'An unexpected error occurred on the server side',
+            'errors' => $e,
         ], 500);
     }
   }

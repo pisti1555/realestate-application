@@ -20,24 +20,28 @@ import PropertyCreate from './pages/properties/PropertyCreate';
 import PropertyEdit from './pages/properties/PropertyEdit';
 import PropertySearch from './pages/properties/PropertySearch';
 
-import MessageShow from './pages/messages/MessageShow';
-import MessageIndex from './pages/messages/MessageIndex';
-import MessageSend from './pages/messages/MessageSend';
+import MessagePage from './pages/messages/Messages';
 
 import Loading from './components/pages/loading/Loading';
-import { Message_Get } from './interface/MessagesInterface';
 
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<UserInterface_Get>({
     id: -1,
-    image: '',
-    name: '',
-    email: '',
-    phone: '',
-    joined: '',
-    role: -1,
+    image: undefined,
+    name: undefined,
+    email: undefined,
+    phone: undefined,
+    joined: undefined,
+    role: undefined,
+    description: undefined,
+    birth_date: undefined,
+    tax_number: undefined,
+    sex: undefined,
+    country: undefined,
+    city: undefined,
+    postal_code: undefined,
     new_msg_count: 0
   });
 
@@ -49,29 +53,41 @@ function App() {
       api.get('/user').then((response) => {
         if (response.status === 200) {
           setUser(response.data.data);
-          console.log(response.data.data);
-          
         } else {
           setUser({
             id: -1,
-            image: '',
-            name: '',
-            email: '',
-            phone: '',
-            joined: '',
-            role: -1,
+            image: undefined,
+            name: undefined,
+            email: undefined,
+            phone: undefined,
+            joined: undefined,
+            role: undefined,
+            description: undefined,
+            birth_date: undefined,
+            tax_number: undefined,
+            sex: undefined,
+            country: undefined,
+            city: undefined,
+            postal_code: undefined,
             new_msg_count: 0
           });
         }
       }).catch((error:any) => {
         setUser({
           id: -1,
-          image: '',
-          name: '',
-          email: '',
-          phone: '',
-          joined: '',
-          role: -1,
+          image: undefined,
+          name: undefined,
+          email: undefined,
+          phone: undefined,
+          joined: undefined,
+          role: undefined,
+          description: undefined,
+          birth_date: undefined,
+          tax_number: undefined,
+          sex: undefined,
+          country: undefined,
+          city: undefined,
+          postal_code: undefined,
           new_msg_count: 0
         });
       }).finally(() => {
@@ -104,15 +120,13 @@ function App() {
         <Route path="/profile/:id" element={<ProfilePage />} />
 
         <Route path="/properties" element={<PropertyIndex />} />
-        <Route path="/properties/:id" element={<PropertyShow />} />
+        <Route path="/properties/:id" element={<PropertyShow user={user} />} />
         <Route path="/properties/create" element={<PropertyCreate user={user} />} />
         <Route path="/properties/edit/:id" element={<PropertyEdit />} />
         <Route path="/search" element={<PropertySearch />} />
         <Route path="/search/:params" element={<PropertySearch />} />
 
-        <Route path="/messages" element={<MessageIndex user={user} />} />
-        <Route path="/messages/:id" element={<MessageShow user={user} />} />
-        <Route path="/messages/send/:id" element={<MessageSend user={user} />} />
+        <Route path="/messages" element={<MessagePage user={user} />} />
 
       </Routes>
     </Router>

@@ -48,14 +48,59 @@ class RegistrationRequest extends FormRequest
                 "nullable",
                 "image",
                 "mimes:jpeg,jpg",
-                "required_with:phone"
             ],
             "phone" => [
                 "nullable",
                 "string",
                 "regex:/^\+?[0-9]{10,15}$/",
-                "required_with:image"
+                "required_with:tax_number"
             ],
+            "tax_number" => [
+                "nullable",
+                "string",
+                "regex:/^\d{8,15}$/",
+                "required_with:phone"
+            ],
+            "agency" => [
+                "nullable",
+                "string",
+                "required_with:phone"
+            ],
+            "description" => [
+                "nullable",
+                "string",
+                "min:20",
+                "max:1000",
+            ],
+            "sex" => [
+                "required",
+                "string",
+                "in:Male,Female,Other",
+            ],
+            "birth_date" => [
+                "required",
+                "date",
+                "before_or_equal:today",
+            ],
+            "country" => [
+                "nullable",
+                "string",
+                "max:50",
+                "required_with:phone"
+            ],
+            "city" => [
+                "nullable",
+                "string",
+                "max:50",
+                "required_with:phone"
+            ],
+            "postal_code" => [
+                "nullable",
+                "string",
+                "max:10",
+                "regex:/^[A-Za-z0-9\s\-]+$/",
+                "required_with:phone"
+            ]
         ];
     }
 }

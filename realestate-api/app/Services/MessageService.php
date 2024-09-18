@@ -6,6 +6,8 @@ use App\Models\Message;
 use App\Http\Resources\MessageResource;
 use App\Models\User;
 use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\StoreMessageByEmail;
+use Illuminate\Support\Facades\Log;
 
 class MessageService
 {
@@ -40,6 +42,45 @@ class MessageService
         ], 403);
       }
 
+      Message::create($validated);
+      return response()->json([
+        'status' => 200,
+        'message' => $validated
+      ], 201);
+  }
+
+  public static function sendMessageByEmail(string $id, StoreMessageByEmail $request) {
+    $validated = $request->validated();
+      $validated['sender'] = $id;
+      $receiver = User::where('email', $validated['receiver'])->first();
+
+      if (!$receiver) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Receiver not found',
+            'receiver' => $receiver,
+            'receiver_col' => $validated['receiver']
+        ], 404);
+      }
+
+      $senderRole = User::findOrFail($validated['sender'])->role;
+      $receiverRole = $receiver->role;
+
+      if ($receiver == $validated['sender']) {
+        return response()->json([
+          'status' => 403,
+          'message' => 'Cannot send a message to yourself'
+        ], 403);
+      }
+
+      if ($senderRole == $receiverRole) {
+        return response()->json([
+          'status' => 403,
+          'message' => 'Unable to send message to the receiver'
+        ], 403);
+      }
+
+      $validated['receiver'] = $receiver->id;
       Message::create($validated);
       return response()->json([
         'status' => 200,

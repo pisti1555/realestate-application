@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\MessageService;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\StoreMessageByEmail;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
@@ -23,6 +24,11 @@ class MessageController extends Controller
     public function store(StoreMessageRequest $request)
     {
         return MessageService::sendMessage(Auth::id(), $request);
+    }
+
+    public function storeByEmail(StoreMessageByEmail $request)
+    {
+        return MessageService::sendMessageByEmail(Auth::id(), $request);
     }
 
     /**

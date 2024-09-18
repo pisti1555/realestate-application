@@ -1,4 +1,4 @@
-import { Message_Post } from "../interface/MessagesInterface";
+import { Message_Post, Message_Post_by_Email } from "../interface/MessagesInterface";
 
 export const validateMessageSendForm = (form:Message_Post) => {
   let receiverValid = false;
@@ -22,6 +22,24 @@ export const validateMessageSendForm = (form:Message_Post) => {
   return errors;
 }
 
+export const validateEmailMessageSendForm = (form:Message_Post_by_Email) => {
+  let errors = {
+    receiver: '',
+    title: '',
+    message: ''
+  }
+  
+  validateEmail(form.receiver)? errors.receiver = '' : errors.receiver = 'Incorrect receiver input';
+  validateTitle(form.title)? errors.title = '' : errors.title = 'Title must be at least 1 and maximum 30 characters long';
+  validateMessage(form.message)? errors.message = '' : errors.message = 'Message must be at least 20 and maximum 500 characters long';
+
+  return errors;
+}
+
+const validateEmail = (email:string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 const validateReceiver = (receiver:number) => {
   return receiver > 0;

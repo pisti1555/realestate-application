@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/sent', [MessageController::class, 'sentMessages'])->name('messages.sent');
     Route::post('/messages/send', [MessageController::class, 'store'])->name('messages.send');
+    Route::post('/messages/send-email', [MessageController::class, 'storeByEmail'])->name('messages.send-email');
     Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
 
     Route::get('/user', function (Request $request) {
